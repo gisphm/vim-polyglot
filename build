@@ -146,7 +146,7 @@ PACKS="
   r-lang:vim-scripts/R.vim
   rspec:keith/rspec.vim
   ruby:vim-ruby/vim-ruby
-  rust:wting/rust.vim
+  rust:rust-lang/rust.vim
   sbt:derekwyatt/vim-sbt
   scala:derekwyatt/vim-scala
   slim:slim-template/vim-slim
@@ -166,6 +166,7 @@ PACKS="
   vm:lepture/vim-velocity
   xls:vim-scripts/XSLT-syntax
   yard:sheerun/vim-yardoc
+  zsh:chrisbra/vim-zsh
 "
 
 rm -rf tmp
