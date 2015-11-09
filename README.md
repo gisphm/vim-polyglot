@@ -1,7 +1,4 @@
-# vim-polyglot [![Build Status][travis-img-url]][travis-url]
-
-[travis-img-url]: https://travis-ci.org/sheerun/vim-polyglot.png
-[travis-url]: https://travis-ci.org/sheerun/vim-polyglot
+# vim-polyglot [![Build Status](https://travis-ci.org/gisphm/vim-polyglot.svg)](https://travis-ci.org/gisphm/vim-polyglot)
 
 A collection of language packs for Vim.
 
