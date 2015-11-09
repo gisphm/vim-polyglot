@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'typescript') == -1
-  
 " Vim indent file, taken from indent/java.vim
 " Language:	    Typescript
 " Maintainer:	None!  Wanna improve this?
@@ -101,5 +99,3 @@ let &cpo = s:keepcpo
 unlet s:keepcpo
 
 " vim: et
-
-endif

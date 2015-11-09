@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'haskell') == -1
-  
 " syntax highlighting for haskell
 "
 " Heavily modified version of the haskell syntax
@@ -176,5 +174,3 @@ if exists('g:haskell_enable_static_pointers') && g:haskell_enable_static_pointer
 endif
 
 let b:current_syntax = "haskell"
-
-endif

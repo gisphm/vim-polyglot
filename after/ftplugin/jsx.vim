@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'jsx') == -1
-  
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim ftplugin file
 "
@@ -17,5 +15,3 @@ if exists("loaded_matchit")
 endif
 
 setlocal suffixesadd+=.jsx
-
-endif

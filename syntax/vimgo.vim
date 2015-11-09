@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'go') == -1
-  
 if exists("b:current_syntax")
     finish
 endif
@@ -11,5 +9,3 @@ syn region  goTitle start="\%1l" end=":"
 
 hi def link goInterface Type
 hi def link goTitle Label
-
-endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'css') == -1
-  
 " Vim syntax file
 " Language:     Cascading Style Sheets
 " Previous Contributor List:
@@ -671,5 +669,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 " vim: ts=8
 
-
-endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'erlang') == -1
-  
 " Vim indent file
 " Language:     Erlang (http://www.erlang.org)
 " Author:       Csaba Hoch <csaba.hoch@gmail.com>
@@ -1481,5 +1479,3 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " vim: sw=2 et fdm=marker
-
-endif

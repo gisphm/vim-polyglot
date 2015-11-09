@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'python') == -1
-  
 " Vim syntax file
 "
 " Based on python.vim (from Vim 6.1 distribution)
@@ -88,6 +86,7 @@ syn keyword pythonStatement	exec return
 syn keyword pythonStatement	pass raise
 syn keyword pythonStatement	global assert
 syn keyword pythonStatement	lambda yield
+syn keyword pythonStatement	async await
 syn keyword pythonStatement	with nonlocal True False None
 syn keyword pythonStatement	def class nextgroup=pythonFunction skipwhite
 syn match   pythonFunction	"[a-zA-Z_][a-zA-Z0-9_]*" display contained
@@ -210,7 +209,7 @@ if exists("python_highlight_builtins") && python_highlight_builtins != 0
   syn keyword pythonBuiltinObj	Ellipsis NotImplemented
 
   syn keyword pythonBuiltinFunc	__import__ abs all any apply
-  syn keyword pythonBuiltinFunc	basestring bool buffer callable
+  syn keyword pythonBuiltinFunc	basestring bool buffer bytearray bytes callable
   syn keyword pythonBuiltinFunc	chr classmethod cmp coerce compile complex
   syn keyword pythonBuiltinFunc	delattr dict dir divmod enumerate eval
   syn keyword pythonBuiltinFunc	execfile file filter float frozenset getattr
@@ -321,5 +320,3 @@ if version >= 508 || !exists("did_python_syn_inits")
 endif
 
 let b:current_syntax = "python"
-
-endif

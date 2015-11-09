@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'python') == -1
-  
 " PEP8 compatible Python indent file
 " Only load this indent file when no other was loaded.
 if exists("b:did_indent")
@@ -213,5 +211,3 @@ function! GetPythonPEPIndent(lnum)
   " In all other cases, line up with the start of the previous statement.
   return indent(sslnum)
 endfunction
-
-endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'go') == -1
-  
 if exists("b:current_syntax")
     finish
 endif
@@ -15,5 +13,3 @@ unlet b:current_syntax
 let b:current_syntax = "gohtmltmpl"
 
 " vim:ts=4:sw=4:et
-
-endif

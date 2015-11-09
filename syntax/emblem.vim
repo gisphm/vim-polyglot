@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'emblem') == -1
-  
 " Language:    emblem
 " Maintainer:  heartsentwined <heartsentwined@cogito-lab.com>
 " URL:         http://github.com/heartsentwined/vim-emblem
@@ -156,5 +154,3 @@ hi def link eblId       Constant
 hi def link eblClass    Identifier
 
 let b:current_syntax = 'emblem'
-
-endif

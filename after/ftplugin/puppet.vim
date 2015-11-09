@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'puppet') == -1
-  
 if !exists('g:puppet_align_hashes')
     let g:puppet_align_hashes = 1
 endif
@@ -15,6 +13,4 @@ if g:puppet_align_hashes && exists(':Tabularize')
         echo repeat('\([^=]\|=[^>]\)*=>',column).'\s\{-\}'.repeat('.',position)
         call search(repeat('\([^=]\|=[^>]\)*=>',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
     endfunction
-endif
-
 endif

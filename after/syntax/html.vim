@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'coffee-script') == -1
-  
 " Language:    CoffeeScript
 " Maintainer:  Mick Koch <mick@kochm.co>
 " URL:         http://github.com/kchmck/vim-coffee-script
@@ -11,10 +9,6 @@ syn region coffeeScript start=#<script [^>]*type="text/coffeescript"[^>]*>#
 \                       end=#</script>#me=s-1 keepend
 \                       contains=@htmlCoffeeScript,htmlScriptTag,@htmlPreproc
 \                       containedin=htmlHead
-
-endif
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'glsl') == -1
-  
 " Language: OpenGL Shading Language
 " Maintainer: Sergey Tikhomirov <sergey@tikhomirov.io>
 
@@ -24,10 +18,6 @@ syn region ShaderScript
       \ keepend
       \ end="</script>"me=s-1
       \ contains=@GLSL,htmlScriptTag,@htmlPreproc
-
-endif
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'less') == -1
-  
 if !exists("g:less_html_style_tags")
   let g:less_html_style_tags = 1
 endif
@@ -53,6 +43,4 @@ syn region lessStyle start=+<style [^>]*type *=[^>]*text/less[^>]*>+ keepend end
 " Reset since 'less' isn't really the current_syntax.
 if exists("s:pre_less_cur_syn")
    let b:current_syntax = s:pre_less_cur_syn
-endif
-
 endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'emberscript') == -1
-  
 " Language:    ember-script
 " Maintainer:  heartsentwined <heartsentwined@cogito-lab.com>
 " URL:         http://github.com/heartsentwined/vim-ember-script
@@ -17,5 +15,3 @@ setlocal smartindent
 setlocal formatoptions-=t formatoptions+=croqlj
 setlocal comments=:#
 setlocal commentstring=#\ %s
-
-endif

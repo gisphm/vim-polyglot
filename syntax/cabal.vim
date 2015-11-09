@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'haskell') == -1
-  
 " syntax highlighting for cabal
 "
 " author: raichoo (raichoo@googlemail.com)
@@ -51,5 +49,3 @@ highlight def link cabalDocNewline Operator
 highlight def link cabalDocCode Macro
 
 let b:current_syntax = "cabal"
-
-endif

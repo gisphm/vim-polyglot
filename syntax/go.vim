@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'go') == -1
-  
 " Copyright 2009 The Go Authors. All rights reserved.
 " Use of this source code is governed by a BSD-style
 " license that can be found in the LICENSE file.
@@ -308,5 +306,3 @@ hi def link     goBuildDirective    PreProc
 syn sync minlines=500
 
 let b:current_syntax = "go"
-
-endif

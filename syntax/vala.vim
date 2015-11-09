@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'vala') == -1
-  
 " Vim syntax file
 " Language:	Vala
 " Maintainers:	Emmanuele Bassi <ebassi@gnome.org>
@@ -200,5 +198,3 @@ let &cpo = s:vala_cpo_save
 unlet s:vala_cpo_save
 
 " vim: ts=8
-
-endif

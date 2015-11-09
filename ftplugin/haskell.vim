@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'haskell') == -1
-  
 if exists("g:loaded_haskellvim_haskell")
   finish
 endif
@@ -21,5 +19,3 @@ function! haskell#makeModuleCommentBlock()
 endfunction
 
 command! -buffer -nargs=0 HaskellAddModuleComment call haskell#makeModuleCommentBlock()
-
-endif

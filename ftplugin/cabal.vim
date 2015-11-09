@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'haskell') == -1
-  
 if exists("g:loaded_haskellvim_cabal")
   finish
 endif
@@ -65,5 +63,3 @@ endfunction
 command! -buffer CabalAddExecutable call cabal#addExecutable()
 command! -buffer CabalAddLibrary call cabal#addLibrary()
 command! -buffer CabalAddFlag call cabal#addFlag()
-
-endif

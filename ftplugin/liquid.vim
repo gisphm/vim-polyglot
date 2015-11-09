@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'liquid') == -1
-  
 " Vim filetype plugin
 " Language:     Liquid
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
@@ -61,5 +59,3 @@ endif
 setlocal commentstring={%\ comment\ %}%s{%\ endcomment\ %}
 
 let b:undo_ftplugin .= 'setl cms< | unlet! b:browsefilter b:match_words'
-
-endif

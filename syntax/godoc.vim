@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'go') == -1
-  
 " Copyright 2011 The Go Authors. All rights reserved.
 " Use of this source code is governed by a BSD-style
 " license that can be found in the LICENSE file.
@@ -47,5 +45,3 @@ syn sync minlines=500
 let b:current_syntax = "godoc"
 
 " vim:ts=4 sts=2 sw=2:
-
-endif

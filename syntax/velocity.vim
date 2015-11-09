@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'vm') == -1
-  
 " Vim syntax file
 " Language:	Velocity HTML template
 " Maintainer:	Hsiaoming Young <http://lepture.com>
@@ -67,5 +65,3 @@ if version >= 508 || !exists("did_velocity_syn_inits")
 endif
 
 let b:current_syntax = "velocity"
-
-endif

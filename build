@@ -121,8 +121,8 @@ PACKS="
   html5:othree/html5.vim
   jade:digitaltoad/vim-jade
   jasmine:glanotte/vim-jasmine
-  javascript:sheerun/yajs.vim
-  json:sheerun/vim-json
+  javascript:othree/yajs.vim
+  json:elzr/vim-json
   jst:briancollins/vim-jst
   jsx:mxw/vim-jsx:_ALL
   julia:dcjones/julia-minimalist-vim
@@ -130,7 +130,7 @@ PACKS="
   latex:LaTeX-Box-Team/LaTeX-Box
   less:groenewege/vim-less
   liquid:tpope/vim-liquid
-  markdown:tpope/vim-markdown
+  markdown:plasticboy/vim-markdown
   nginx:mutewinter/nginx.vim
   ocaml:jrk/vim-ocaml
   octave:vim-scripts/octave.vim--
@@ -144,7 +144,7 @@ PACKS="
   qml:peterhoeg/vim-qml
   ragel:jneen/ragel.vim
   r-lang:vim-scripts/R.vim
-  rspec:sheerun/rspec.vim
+  rspec:keith/rspec.vim
   ruby:vim-ruby/vim-ruby
   rust:wting/rust.vim
   sbt:derekwyatt/vim-sbt
@@ -152,7 +152,7 @@ PACKS="
   slim:slim-template/vim-slim
   solidity:ethereum/vim-solidity
   stylus:wavded/vim-stylus
-  swift:toyamarinyon/vim-swift
+  swift:keith/swift.vim
   systemd:kurayama/systemd-vim-syntax
   textile:timcharper/textile.vim
   thrift:solarnz/thrift.vim

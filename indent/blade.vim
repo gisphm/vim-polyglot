@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'blade') == -1
-  
 " Language:     Blade
 " Author:       Barry Deeney <sitemaster16@gmail.com>
 " Version:      0.1
@@ -62,5 +60,3 @@ endfunc
 
 " Make sure we store that flag!
 let b:did_indent = 1
-
-endif

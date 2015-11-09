@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'liquid') == -1
-  
 " Vim indent file
 " Language:     Liquid
 " Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
@@ -62,5 +60,3 @@ function! GetLiquidIndent(...)
   let ind -= &sw * s:count(cline,'{%\s*end\w*$')
   return ind
 endfunction
-
-endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'kotlin') == -1
-  
 " Vim syntax file
 " Language: Kotlin
 " Maintainer: Alexander Udalov
@@ -99,5 +97,3 @@ hi link ktFloat Float
 
 hi link ktExclExcl Special
 hi link ktArrow Structure
-
-endif

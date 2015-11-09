@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'javascript') == -1
-  
 syntax keyword javascriptGlobal Function Boolean Error EvalError InternalError RangeError
 syntax keyword javascriptGlobal ReferenceError StopIteration SyntaxError TypeError
 syntax keyword javascriptGlobal URIError Date Float32Array Float64Array Int16Array
@@ -12,6 +10,4 @@ syntax keyword javascriptGlobalMethod eval uneval isFinite isNaN parseFloat pars
 syntax keyword javascriptGlobalMethod decodeURI decodeURIComponent encodeURI encodeURIComponent nextgroup=javascriptFuncCallArg
 syntax cluster props add=javascriptGlobalMethod
 if exists("did_javascript_hilink") | HiLink javascriptGlobalMethod Structure
-endif
-
 endif

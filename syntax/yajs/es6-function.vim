@@ -1,5 +1,5 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'javascript') == -1
-  
 syntax keyword javascriptGlobal Function
-
+syntax keyword javascriptFunctionMethod contained apply bind call nextgroup=javascriptFuncCallArg
+syntax cluster props add=javascriptFunctionMethod
+if exists("did_javascript_hilink") | HiLink javascriptFunctionMethod Keyword
 endif

@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'haskell') == -1
-  
 " indentation for haskell
 "
 " Based on idris indentation
@@ -185,5 +183,3 @@ function! GetHaskellIndent()
 
   return match(l:prevline, '\S')
 endfunction
-
-endif

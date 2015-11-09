@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'emblem') == -1
-  
 " Language:    emblem
 " Maintainer:  heartsentwined <heartsentwined@cogito-lab.com>
 " URL:         http://github.com/heartsentwined/vim-emblem
@@ -17,5 +15,3 @@ setlocal smartindent
 setlocal formatoptions=q
 setlocal comments=:/
 setlocal commentstring=/\ %s
-
-endif

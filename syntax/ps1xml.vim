@@ -1,5 +1,3 @@
-if !exists('g:polyglot_disabled') || index(g:polyglot_disabled, 'powershell') == -1
-  
 " Vim syntax file
 " Language:           Windows PowerShell XML
 " Maintainer:         Peter Provost <peter@provost.org>
@@ -56,5 +54,3 @@ let b:current_syntax = "ps1xml"
 let &cpo = s:ps1xml_cpo_save
 unlet s:ps1xml_cpo_save
 
-
-endif
