@@ -2,9 +2,9 @@
 
 set -E
 
-DIRS="syntax indent compiler autoload ftplugin ftdetect after/syntax after/indent after/ftplugin after/ftdetect"
-DIRS_BASIC="syntax indent ftdetect after/syntax after/indent after/ftdetect"
-DIRS_ALL="syntax indent compiler autoload ftplugin ftdetect after"
+DIRS="syntax indent compiler autoload ftplugin ftdetect syntax_checkers after/syntax after/indent after/ftplugin after/ftdetect"
+DIRS_BASIC="syntax indent ftdetect syntax_checkers after/syntax after/indent after/ftdetect"
+DIRS_ALL="syntax indent compiler autoload ftplugin ftdetect syntax_checkers after"
 
 OUTPUT=""
 
