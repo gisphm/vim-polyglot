@@ -131,9 +131,8 @@ PACKS="
   less:groenewege/vim-less
   liquid:tpope/vim-liquid
   markdown:plasticboy/vim-markdown
-  nginx:mutewinter/nginx.vim
+  nginx:moskytw/nginx-contrib-vim
   ocaml:jrk/vim-ocaml
-  octave:vim-scripts/octave.vim--
   opencl:petRUShka/vim-opencl
   perl:vim-perl/vim-perl
   php:StanAngeloff/php.vim
@@ -143,7 +142,7 @@ PACKS="
   python:mitsuhiko/vim-python-combined
   qml:peterhoeg/vim-qml
   ragel:jneen/ragel.vim
-  r-lang:vim-scripts/R.vim
+  r-lang:jcfaria/Vim-R-plugin
   rspec:keith/rspec.vim
   ruby:vim-ruby/vim-ruby
   rust:rust-lang/rust.vim
@@ -162,10 +161,8 @@ PACKS="
   twig:beyondwords/vim-twig
   typescript:leafgarland/typescript-vim
   vala:tkztmk/vim-vala
-  vbnet:vim-scripts/vbnet.vim
   vm:lepture/vim-velocity
-  xls:vim-scripts/XSLT-syntax
-  yard:sheerun/vim-yardoc
+  yard:noprompt/vim-yardoc
   zsh:chrisbra/vim-zsh
 "
 

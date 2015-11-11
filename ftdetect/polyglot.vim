@@ -109,7 +109,10 @@ if has("autocmd")
   au  BufNewFile,BufRead *.mustache,*.hogan,*.hulk,*.hjs set filetype=html.mustache syntax=mustache | runtime! ftplugin/mustache.vim ftplugin/mustache*.vim ftplugin/mustache/*.vim
   au  BufNewFile,BufRead *.handlebars,*.hbs set filetype=html.handlebars syntax=mustache | runtime! ftplugin/mustache.vim ftplugin/mustache*.vim ftplugin/mustache/*.vim
 endif
-au BufRead,BufNewFile /etc/nginx/*,/usr/local/nginx/*,*/nginx/vhosts.d/*,nginx.conf if &ft == '' | setfiletype nginx | endif
+au BufRead,BufNewFile *.nginx set ft=nginx
+au BufRead,BufNewFile */etc/nginx/* set ft=nginx
+au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
+au BufRead,BufNewFile nginx.conf set ft=nginx
 au BufRead,BufNewFile *.cl set filetype=opencl
 function! s:DetectPerl6()
   let line_no = 1
@@ -178,6 +181,22 @@ au BufNewFile,BufRead Podfile,*.podspec		call s:setf('ruby')
 au BufNewFile,BufRead [rR]outefile		call s:setf('ruby')
 au BufNewFile,BufRead .simplecov		set filetype=ruby
 au BufRead,BufNewFile *.rs set filetype=rust
+if exists("disable_r_ftplugin")
+  finish
+endif
+autocmd BufNewFile,BufRead *.Rprofile set ft=r
+autocmd BufRead *.Rhistory set ft=r
+autocmd BufNewFile,BufRead *.r set ft=r
+autocmd BufNewFile,BufRead *.R set ft=r
+autocmd BufNewFile,BufRead *.s set ft=r
+autocmd BufNewFile,BufRead *.S set ft=r
+autocmd BufNewFile,BufRead *.Rout set ft=rout
+autocmd BufNewFile,BufRead *.Rout.save set ft=rout
+autocmd BufNewFile,BufRead *.Rout.fail set ft=rout
+autocmd BufNewFile,BufRead *.Rrst set ft=rrst
+autocmd BufNewFile,BufRead *.rrst set ft=rrst
+autocmd BufNewFile,BufRead *.Rmd set ft=rmd
+autocmd BufNewFile,BufRead *.rmd set ft=rmd
 au BufRead,BufNewFile *.sbt set filetype=sbt.scala
 fun! s:DetectScala()
     if getline(1) =~# '^#!\(/usr\)\?/bin/env\s\+scalas\?'
