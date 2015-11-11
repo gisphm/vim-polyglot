@@ -1,8 +1,9 @@
 sudo: false
 addons:
   apt:
-    package:
-      - vim-gtk
+    packages:
+    - ed
+    - vim-gtk
 language: ruby
 cache: bundler
 rvm:
