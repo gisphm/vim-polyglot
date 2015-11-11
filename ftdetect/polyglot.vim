@@ -87,18 +87,6 @@ au BufRead,BufNewFile *.jl		set filetype=julia
 autocmd BufNewFile,BufRead *.kt setfiletype kotlin
 autocmd BufNewFile,BufRead *.kts setfiletype kotlin
 autocmd BufNewFile,BufRead *.less setf less
-au BufNewFile,BufRead *.liquid					set ft=liquid
-au BufNewFile,BufRead */_layouts/*.html,*/_includes/*.html	set ft=liquid
-au BufNewFile,BufRead *.html,*.xml,*.textile
-      \ if getline(1) == '---' | set ft=liquid | endif
-au BufNewFile,BufRead *.markdown,*.mkd,*.mkdn,*.md
-      \ if getline(1) == '---' |
-      \   let b:liquid_subtype = 'markdown' |
-      \   set ft=liquid |
-      \ endif
-au BufNewFile,BufRead */templates/**.liquid,*/layout/**.liquid,*/snippets/**.liquid
-      \ let b:liquid_subtype = 'html' |
-      \ set ft=liquid |
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=markdown
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}.{des3,des,bf,bfa,aes,idea,cast,rc2,rc4,rc5,desx} set filetype=markdown
 autocmd BufRead *.html
@@ -235,8 +223,6 @@ autocmd BufNewFile,BufRead {.,}tmux.conf{.*,} setlocal filetype=tmux
 autocmd BufNewFile,BufRead {.,}tmux.conf{.*,} setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *.toml set filetype=toml
 autocmd BufNewFile,BufRead Cargo.lock set filetype=toml
-autocmd BufNewFile,BufRead *.twig set filetype=twig
-autocmd BufNewFile,BufRead *.html.twig set filetype=html.twig
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 autocmd BufRead *.vala,*.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala,*.vapi setfiletype vala
