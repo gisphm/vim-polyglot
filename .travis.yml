@@ -1,7 +1,12 @@
+sudo: false
+addons:
+  apt:
+    package:
+      - vim-gtk
 language: ruby
+cache: bundler
 rvm:
   - 1.9.3
-before_install: sudo apt-get install vim-gtk
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"

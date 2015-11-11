@@ -194,6 +194,8 @@ endfun
 au BufRead,BufNewFile *.scala set filetype=scala
 au BufRead,BufNewFile * call s:DetectScala()
 au BufRead,BufNewFile *.sbt setfiletype sbt.scala
+au BufRead,BufNewFile *.scss set filetype=scss
+au BufEnter *.scss :syntax sync fromstart
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 au BufNewFile,BufRead *.sol setf solidity
 autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
