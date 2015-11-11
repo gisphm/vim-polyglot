@@ -41,6 +41,7 @@ Optionally download one of the [releases](https://github.com/sheerun/vim-polyglo
 - [git](https://github.com/tpope/vim-git) (syntax, indent, ftplugin, ftdetect)
 - [glsl](https://github.com/tikhomirov/vim-glsl) (syntax, indent, ftdetect)
 - [go](https://github.com/fatih/vim-go) (syntax, indent, ftdetect)
+- [gradle](https://github.com/gisphm/vim-gradle) (syntax, compiler, ftplugin, ftdetect)
 - [groovy](https://github.com/vim-scripts/groovy.vim) (syntax)
 - [haml](https://github.com/tpope/vim-haml) (syntax, indent, compiler, ftplugin, ftdetect)
 - [handlebars](https://github.com/mustache/vim-mustache-handlebars) (syntax, indent, ftplugin, ftdetect)
