@@ -103,6 +103,7 @@ PACKS="
   clojure:guns/vim-clojure-static
   coffee-script:kchmck/vim-coffee-script
   css:JulesWang/css.vim
+  css-color:ap/vim-css-color
   css3:hail2u/vim-css3-syntax
   csv:chrisbra/csv.vim
   cucumber:tpope/vim-cucumber
