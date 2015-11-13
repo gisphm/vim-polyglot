@@ -97,7 +97,7 @@ EOF
 
 PACKS="
   arduino:sudar/vim-arduino-syntax
-  blade:xsbeats/vim-blade
+  blade:jwalton512/vim-blade
   c++11:octol/vim-cpp-enhanced-highlight
   cjsx:mtscout6/vim-cjsx
   clojure:guns/vim-clojure-static
@@ -159,7 +159,7 @@ PACKS="
   textile:timcharper/textile.vim
   thrift:solarnz/thrift.vim
   tmux:tejr/vim-tmux
-  tomdoc:duwanis/tomdoc.vim
+  tomdoc:wellbredgrapefruit/tomdoc.vim
   toml:cespare/vim-toml
   twig:qbbr/vim-twig
   typescript:leafgarland/typescript-vim
