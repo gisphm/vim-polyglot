@@ -103,7 +103,7 @@ au BufRead,BufNewFile *.nginx set ft=nginx
 au BufRead,BufNewFile */etc/nginx/* set ft=nginx
 au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
 au BufRead,BufNewFile nginx.conf set ft=nginx
-au BufRead,BufNewFile *.cl set filetype=opencl
+au! BufRead,BufNewFile *.cl set filetype=opencl
 function! s:DetectPerl6()
   let line_no = 1
   let eof     = line('$')
