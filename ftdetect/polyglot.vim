@@ -33,6 +33,7 @@ autocmd FileType ember-script set tabstop=2|set shiftwidth=2|set expandtab
 autocmd BufNewFile,BufRead *.emblem set filetype=emblem
 autocmd FileType emblem set tabstop=2|set shiftwidth=2|set expandtab
 au BufNewFile,BufRead *.erl,*.hrl,rebar.config,*.app,*.app.src,*.yaws,*.xrl set ft=erlang
+au BufNewFile,BufRead .gitignore set filetype=gitignore
 autocmd BufNewFile,BufRead *.git/{,modules/**/,worktrees/*/}{COMMIT_EDIT,TAG_EDIT,MERGE_,}MSG set ft=gitcommit
 autocmd BufNewFile,BufRead *.git/config,.gitconfig,gitconfig,.gitmodules set ft=gitconfig
 autocmd BufNewFile,BufRead */.config/git/config                          set ft=gitconfig
@@ -76,6 +77,36 @@ au BufRead,BufNewFile *.hsc set filetype=haskell
 autocmd BufNewFile,BufRead *.hx setf haxe
 autocmd BufNewFile,BufReadPost *.jade set filetype=jade
 autocmd BufNewFile,BufRead *Spec.js,*_spec.js set filetype=jasmine.javascript syntax=jasmine
+au BufNewFile,BufRead *.js setf javascript
+au BufNewFile,BufRead *.jsm setf javascript
+au BufNewFile,BufRead Jakefile setf javascript
+fun! s:SelectJavascript()
+  if getline(1) =~# '^#!.*/bin/env\s\+node\>'
+    set ft=javascript
+  endif
+endfun
+au BufNewFile,BufRead * call s:SelectJavascript()
+if !exists('g:jsx_ext_required')
+  let g:jsx_ext_required = 1
+endif
+if !exists('g:jsx_pragma_required')
+  let g:jsx_pragma_required = 0
+endif
+if g:jsx_pragma_required
+  " Look for the @jsx pragma.  It must be included in a docblock comment before
+  " anything else in the file (except whitespace).
+  let s:jsx_pragma_pattern = '\%^\_s*\/\*\*\%(\_.\%(\*\/\)\@!\)*@jsx\_.\{-}\*\/'
+  let b:jsx_pragma_found = search(s:jsx_pragma_pattern, 'npw')
+endif
+fu! <SID>EnableJSX()
+  if g:jsx_pragma_required && !b:jsx_pragma_found | return 0 | endif
+  if g:jsx_ext_required && !exists('b:jsx_ext_found') | return 0 | endif
+  return 1
+endfu
+autocmd BufNewFile,BufRead *.jsx let b:jsx_ext_found = 1
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+autocmd BufNewFile,BufRead *.js
+  \ if <SID>EnableJSX() | set filetype=javascript.jsx | endif
 autocmd BufNewFile,BufRead *.json setlocal filetype=json
 autocmd BufNewFile,BufRead *.jsonp setlocal filetype=json
 autocmd BufNewFile,BufRead *.geojson setlocal filetype=json
@@ -103,6 +134,13 @@ au BufRead,BufNewFile *.nginx set ft=nginx
 au BufRead,BufNewFile */etc/nginx/* set ft=nginx
 au BufRead,BufNewFile */usr/local/nginx/conf/* set ft=nginx
 au BufRead,BufNewFile nginx.conf set ft=nginx
+function! s:isNode()
+	let shebang = getline(1)
+	if shebang =~# '^#!.*/bin/env\s\+node\>' | return 1 | en
+	if shebang =~# '^#!.*/bin/node\>' | return 1 | en
+	return 0
+endfunction
+au BufRead,BufNewFile * if !did_filetype() && s:isNode() | setf javascript | en
 au! BufRead,BufNewFile *.cl set filetype=opencl
 function! s:DetectPerl6()
   let line_no = 1

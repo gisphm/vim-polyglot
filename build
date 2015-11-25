@@ -2,9 +2,9 @@
 
 set -E
 
-DIRS="syntax indent compiler autoload ftplugin ftdetect syntax_checkers after/syntax after/indent after/ftplugin after/ftdetect"
-DIRS_BASIC="syntax indent ftdetect syntax_checkers after/syntax after/indent after/ftdetect"
-DIRS_ALL="syntax indent compiler autoload ftplugin ftdetect syntax_checkers after"
+DIRS="syntax indent compiler autoload ftplugin ftdetect doc syntax_checkers after/syntax after/indent after/ftplugin after/ftdetect neosnippets"
+DIRS_BASIC="syntax indent ftdetect syntax_checkers doc after/syntax after/indent after/ftdetect neosnippets"
+DIRS_ALL="syntax indent compiler autoload ftplugin doc ftdetect syntax_checkers after neosnippets"
 
 OUTPUT=""
 
@@ -63,7 +63,7 @@ extract() {
 }
 
 copy_dir() {
-  for file in $(find "$1/$2" -name '*.vim'); do
+  for file in $(find "$1/$2" -name '*.vim' -or -name '*.snip' -or -name '*.txt'); do
     file_path="$(dirname "${file##$1/}")"
     mkdir -p "$file_path"
     touch "$file_path/$(basename "$file")"
@@ -113,6 +113,7 @@ PACKS="
   emblem:heartsentwined/vim-emblem
   erlang:vim-erlang/vim-erlang-runtime
   git:tpope/vim-git
+  gitignore:gisphm/vim-gitignore
   glsl:tikhomirov/vim-glsl
   go:fatih/vim-go:_BASIC
   gradle:gisphm/vim-gradle
@@ -124,8 +125,11 @@ PACKS="
   html5:othree/html5.vim
   jade:digitaltoad/vim-jade
   jasmine:glanotte/vim-jasmine
-  javascript:othree/yajs.vim
+  javascript:pangloss/vim-javascript
+  javascript-library:othree/javascript-libraries-syntax.vim
+  jsdoc:heavenshell/vim-jsdoc
   json:elzr/vim-json
+  jspc:othree/jspc.vim
   jst:briancollins/vim-jst
   jsx:mxw/vim-jsx:_ALL
   julia:dcjones/julia-minimalist-vim
@@ -134,6 +138,7 @@ PACKS="
   less:groenewege/vim-less
   markdown:plasticboy/vim-markdown
   nginx:moskytw/nginx-contrib-vim
+  node:moll/vim-node
   ocaml:jrk/vim-ocaml
   opencl:petRUShka/vim-opencl
   perl:vim-perl/vim-perl
@@ -153,6 +158,7 @@ PACKS="
   scss:cakebaker/scss-syntax.vim
   slim:slim-template/vim-slim
   solidity:ethereum/vim-solidity
+  sql:gisphm/dbext.vim
   stylus:wavded/vim-stylus
   swift:keith/swift.vim
   systemd:kurayama/systemd-vim-syntax
@@ -165,7 +171,9 @@ PACKS="
   typescript:leafgarland/typescript-vim
   vala:tkztmk/vim-vala
   vm:lepture/vim-velocity
+  xml:sukima/xmledit
   yard:noprompt/vim-yardoc
+  yajs:othree/yajs.vim
   zsh:chrisbra/vim-zsh
 "
 

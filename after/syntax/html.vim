@@ -76,6 +76,16 @@ syn region ShaderScript
       \ keepend
       \ end="</script>"me=s-1
       \ contains=@GLSL,htmlScriptTag,@htmlPreproc
+" Vim plugin file
+" Language:    
+" Maintainer:  othree <othree@gmail.com>
+" Last Change: 2013/08/26
+" Version:     0.5.1
+" URL:         https://github.com/othree/javascript-libraries-syntax.vim
+
+if b:current_syntax == 'html'
+  call jslibsyntax#load()
+endif
 if !exists("g:less_html_style_tags")
   let g:less_html_style_tags = 1
 endif
