@@ -97,6 +97,7 @@ EOF
 
 PACKS="
   arduino:sudar/vim-arduino-syntax
+  asciidoc:asciidoc/vim-asciidoc
   blade:jwalton512/vim-blade
   c++11:octol/vim-cpp-enhanced-highlight
   cjsx:mtscout6/vim-cjsx

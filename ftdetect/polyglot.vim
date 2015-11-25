@@ -1,4 +1,6 @@
 au BufRead,BufNewFile *.ino,*.pde set filetype=arduino
+autocmd BufNewFile,BufRead *.asciidoc,*.adoc
+	\ set ft=asciidoc
 au BufNewFile,BufRead *.blade.php set filetype=blade
 augroup CJSX
   au!
