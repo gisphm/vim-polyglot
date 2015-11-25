@@ -153,6 +153,7 @@ PACKS="
   r-lang:jcfaria/Vim-R-plugin
   rspec:keith/rspec.vim
   ruby:vim-ruby/vim-ruby
+  ruby-minitest:sunaku/vim-ruby-minitest
   rust:rust-lang/rust.vim
   sbt:derekwyatt/vim-sbt
   scala:derekwyatt/vim-scala

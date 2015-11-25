@@ -79,6 +79,7 @@ Optionally download one of the [releases](https://github.com/sheerun/vim-polyglo
 - [r-lang](https://github.com/jcfaria/Vim-R-plugin) (syntax, autoload, ftplugin, ftdetect, doc)
 - [rspec](https://github.com/keith/rspec.vim) (syntax, ftdetect)
 - [ruby](https://github.com/vim-ruby/vim-ruby) (syntax, indent, compiler, autoload, ftplugin, ftdetect, doc)
+- [ruby-minitest](https://github.com/sunaku/vim-ruby-minitest) (doc, syntax)
 - [rust](https://github.com/rust-lang/rust.vim) (syntax, indent, compiler, autoload, ftplugin, ftdetect, doc, syntax_checkers)
 - [sbt](https://github.com/derekwyatt/vim-sbt) (syntax, ftdetect)
 - [scala](https://github.com/derekwyatt/vim-scala) (syntax, indent, compiler, ftplugin, ftdetect, doc)
