@@ -159,6 +159,7 @@ PACKS="
   scala:derekwyatt/vim-scala
   scss:cakebaker/scss-syntax.vim
   slim:slim-template/vim-slim
+  snippets:gisphm/vim-snippets-neosnippet
   solidity:ethereum/vim-solidity
   sql:gisphm/dbext.vim
   stylus:wavded/vim-stylus
