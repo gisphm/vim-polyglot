@@ -42,7 +42,7 @@ Optionally download one of the [releases](https://github.com/sheerun/vim-polyglo
 - [git](https://github.com/tpope/vim-git) (syntax, indent, ftplugin, ftdetect, doc)
 - [gitignore](https://github.com/gisphm/vim-gitignore) (syntax, indent, ftplugin, ftdetect, neosnippets)
 - [glsl](https://github.com/tikhomirov/vim-glsl) (syntax, indent, ftdetect)
-- [go](https://github.com/fatih/vim-go) (syntax, indent, ftdetect, doc)
+- [go](https://github.com/fatih/vim-go) (syntax, indent, compiler, autoload, ftplugin, ftdetect, doc)
 - [gradle](https://github.com/gisphm/vim-gradle) (syntax, compiler, ftplugin, ftdetect)
 - [groovy](https://github.com/vim-scripts/groovy.vim) (syntax)
 - [haml](https://github.com/tpope/vim-haml) (syntax, indent, compiler, ftplugin, ftdetect)
