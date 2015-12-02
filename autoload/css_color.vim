@@ -1,6 +1,6 @@
 " Language:     Colorful CSS Color Preview
 " Author:       Aristotle Pagaltzis <pagaltzis@gmx.de>
-" Commit:       7ad79c7b77bd83296d7a10e596860d9269070207
+" Commit:       $Format:%H$
 " Licence:      The MIT License (MIT)
 
 if v:version < 700
