@@ -51,7 +51,8 @@ php:StanAngeloff/php.vim
 powershell:Persistent13/vim-ps1
 protobuf:uarun/vim-protobuf
 puppet:rodjek/vim-puppet
-python:mitsuhiko/vim-python-combined
+python:mitsuhiko/vim-python-combined:_NOSYNTAX
+python-syntax:me-vlad/python-syntax.vim
 qml:peterhoeg/vim-qml
 ragel:jneen/ragel.vim
 r-lang:jcfaria/Vim-R-plugin
