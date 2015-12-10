@@ -18,8 +18,6 @@ A collection of language packs for Vim.
 1. Install Pathogen, Vundle, NeoBundle, or Plug package manager for Vim.
 2. Use this repository as submodule or package.
 
-Optionally download one of the [releases](https://github.com/sheerun/vim-polyglot/releases) and unpack it directly under `~/.vim` directory.
-
 ## Language packs
 
 - [arduino](https://github.com/sudar/vim-arduino-syntax) (syntax, indent, ftdetect)
@@ -106,17 +104,6 @@ Optionally download one of the [releases](https://github.com/sheerun/vim-polyglo
 - [yard](https://github.com/noprompt/vim-yardoc) (syntax)
 - [yajs](https://github.com/othree/yajs.vim) (syntax)
 - [zsh](https://github.com/chrisbra/vim-zsh) (syntax, indent, ftplugin)
-
-## Disabling a language pack
-
-Individual language packs can be disabled by setting `g:polyglot_disabled`.
-
-```viml
-" ~/.vimrc
-let g:polyglot_disabled = ['css']
-```
-
-Note that disabiling languages won't make in general your vim startup any faster / slower (only for specific file type). Vim-polyglot is selection of language plugins that are loaded only on demand.
 
 ## Updating
 
