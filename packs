@@ -42,6 +42,7 @@ latex:LaTeX-Box-Team/LaTeX-Box
 less:groenewege/vim-less
 lua:tbastos/vim-lua
 markdown:plasticboy/vim-markdown
+neosnippet:Shougo/neosnippet-snippets
 nginx:moskytw/nginx-contrib-vim
 node:moll/vim-node
 objc:b4winckler/vim-objc
