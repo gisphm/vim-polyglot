@@ -1,11 +1,3 @@
-snippet     CFLAGS
-options     head
-  CFLAGS=-Wall -g ${0: -llua -lzeromq}
-
-snippet     clean:
-options     head
-  clean:
-    rm -f ${0}
 # base
 snippet base
     .PHONY: clean, mrproper
