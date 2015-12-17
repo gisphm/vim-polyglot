@@ -15,6 +15,7 @@ elixir:elixir-lang/vim-elixir
 emberscript:heartsentwined/vim-ember-script
 emblem:heartsentwined/vim-emblem
 erlang:vim-erlang/vim-erlang-runtime
+es7:othree/es.next.syntax.vim
 git:tpope/vim-git
 gitignore:gisphm/vim-gitignore
 glsl:tikhomirov/vim-glsl

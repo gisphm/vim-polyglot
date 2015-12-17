@@ -37,6 +37,7 @@ A collection of language packs for Vim.
 - [emberscript](https://github.com/heartsentwined/vim-ember-script) (syntax, indent, ftplugin, ftdetect)
 - [emblem](https://github.com/heartsentwined/vim-emblem) (syntax, indent, ftplugin, ftdetect)
 - [erlang](https://github.com/vim-erlang/vim-erlang-runtime) (syntax, indent, ftdetect)
+- [es7](https://github.com/othree/es.next.syntax.vim) (syntax)
 - [git](https://github.com/tpope/vim-git) (syntax, indent, ftplugin, ftdetect, doc)
 - [gitignore](https://github.com/gisphm/vim-gitignore) (syntax, indent, ftplugin, ftdetect, neosnippets)
 - [glsl](https://github.com/tikhomirov/vim-glsl) (syntax, indent, ftdetect)
