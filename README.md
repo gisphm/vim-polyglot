@@ -64,7 +64,7 @@ A collection of language packs for Vim.
 - [latex](https://github.com/LaTeX-Box-Team/LaTeX-Box) (syntax, indent, ftplugin, doc)
 - [less](https://github.com/groenewege/vim-less) (syntax, indent, ftplugin, ftdetect)
 - [lua](https://github.com/tbastos/vim-lua) (syntax, indent)
-- [markdown](https://github.com/plasticboy/vim-markdown) (syntax, indent, ftplugin, ftdetect)
+- [markdown](https://github.com/plasticboy/vim-markdown) (syntax, indent, ftplugin, ftdetect, doc)
 - [nginx](https://github.com/moskytw/nginx-contrib-vim) (syntax, indent, ftdetect)
 - [node](https://github.com/moll/vim-node) (autoload, ftdetect)
 - [objc](https://github.com/b4winckler/vim-objc) (ftplugin, syntax, indent)
