@@ -16,7 +16,6 @@ if !( has('gui_running') || &t_Co==256 ) | finish | endif
 
 " default html syntax should already be including the css syntax
 syn cluster colorableGroup add=htmlString,htmlCommentPart
-syn include @htmlCss syntax/css/html5-elements.vim
 syn include @htmlCss syntax/css/compositing-1.vim
 syn include @htmlCss syntax/css/css3-animations.vim
 syn include @htmlCss syntax/css/css3-background.vim
@@ -49,9 +48,10 @@ syn include @htmlCss syntax/css/css-inline-3.vim
 syn include @htmlCss syntax/css/css-line-grid-1.vim
 syn include @htmlCss syntax/css/css-lists-3.vim
 syn include @htmlCss syntax/css/css-masking-1.vim
+syn include @htmlCss syntax/css/cssom-view.vim
 syn include @htmlCss syntax/css/css-overflow-3.vim
-syn include @htmlCss syntax/css/css-pseudo-4.vim
 syn include @htmlCss syntax/css/css-page-floats-3.vim
+syn include @htmlCss syntax/css/css-pseudo-4.vim
 syn include @htmlCss syntax/css/css-round-display-1.vim
 syn include @htmlCss syntax/css/css-ruby-1.vim
 syn include @htmlCss syntax/css/css-scoping-1.vim
@@ -66,6 +66,7 @@ syn include @htmlCss syntax/css/css-values.vim
 syn include @htmlCss syntax/css/css-variables.vim
 syn include @htmlCss syntax/css/css-will-change-1.vim
 syn include @htmlCss syntax/css/css-writing-modes-3.vim
+syn include @htmlCss syntax/css/html5-elements.vim
 syn include @htmlCss syntax/css/selectors4.vim
 " Language: OpenGL Shading Language
 " Maintainer: Sergey Tikhomirov <sergey@tikhomirov.io>

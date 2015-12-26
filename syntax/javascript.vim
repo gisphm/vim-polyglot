@@ -508,7 +508,7 @@ syntax cluster javascriptValue                 contains=@javascriptTypes,@javasc
 
 syntax match   javascriptLabel                 /[a-zA-Z_$]\k*\_s*:/he=e-1 contains=javascriptReserved nextgroup=@javascriptValue,@javascriptStatement skipwhite skipempty
 syntax match   javascriptObjectLabel           contained /\k\+\_s*:/he=e-1 contains=javascriptObjectLabelColon nextgroup=@javascriptComments,@javascriptValue,@javascriptStatement skipwhite skipempty
-syntax match   javascriptObjectLabelColon      contained /:/ nextgroup=@javascriptValue skipwhite skipempty
+syntax match   javascriptObjectLabelColon      contained /\s*:/ nextgroup=@javascriptValue skipwhite skipempty
 " syntax match   javascriptPropertyName          contained /"[^"]\+"\s*:/he=e-1 nextgroup=@javascriptValue skipwhite skipempty
 " syntax match   javascriptPropertyName          contained /'[^']\+'\s*:/he=e-1 nextgroup=@javascriptValue skipwhite skipempty
 syntax region  javascriptPropertyName          contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ nextgroup=javascriptObjectLabelColon skipwhite skipempty
@@ -674,7 +674,7 @@ syntax cluster javascriptSymbols               contains=javascriptOpSymbols,java
 syntax match   javascriptWSymbols              contained /\_s\+/ nextgroup=@javascriptSymbols,@javascriptComments,javascriptDotNotation
 
 syntax region  javascriptRegexpString          start="\(^\|&\||\|=\|(\|{\|;\|:\|\[\|!\|?\)\@<=\_s*/\ze[^/*]" skip="\\\\\|[^\\]\@<=\\/" end="/[gimy]\{0,2\}" oneline contains=javascriptRegexpSet,javascriptRegexpLeftBracket
-syntax region  javascriptRegexpSet             contained start="\[" skip="[^\\]\@<=\\\]" end="\]" extend transparent 
+syntax region  javascriptRegexpSet             contained start="\[" skip="[^\\]\@<=\\\]" end="\]" extend 
 syntax match   javascriptRegexpLeftBracket     contained /\\\[/ 
 
 syntax cluster javascriptEventTypes            contains=javascriptEventString,javascriptTemplate,javascriptNumber,javascriptBoolean,javascriptNull
@@ -701,7 +701,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptReserved             Error
   HiLink javascriptInvalidOp            Error
 
-  HiLink javascriptEndColons            Exception
+  HiLink javascriptEndColons            Statement
   HiLink javascriptOpSymbol             Normal
   HiLink javascriptLogicSymbol          Boolean
   HiLink javascriptBraces               Function
@@ -729,6 +729,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptTemplateSStringRB    javascriptTemplateSubstitution
   HiLink javascriptTemplateSB           javascriptTemplateSubstitution
   HiLink javascriptRegexpString         String
+  HiLink javascriptRegexpSet            javascriptRegexpString
   HiLink javascriptRegexpLeftBracket    javascriptRegexpString
   HiLink javascriptGlobal               Constant
   HiLink javascriptCharacter            Character
