@@ -620,7 +620,9 @@ syntax region  javascriptImportDef             start=/import/ end=/;\|\n/ contai
 syntax keyword javascriptImport                contained from as import
 syntax keyword javascriptImportAs              contained as
 syntax region  javascriptImportBlock           matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=javascriptImportAs
-syntax keyword javascriptExport                export module
+syntax keyword javascriptExport                export nextgroup=javascriptExportDefault skipwhite
+syntax keyword javascriptExport                module
+syntax keyword javascriptExportDefault         contained default
 
 syntax region  javascriptBlock                 matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=@htmlJavaScript
 
@@ -691,8 +693,8 @@ syntax cluster javascriptSymbols               contains=javascriptOpSymbols,java
 " syntax match   javascriptWSymbols              contained /\_s\+/ nextgroup=@javascriptSymbols
 syntax region  javascriptEventFuncCallArg      contained matchgroup=javascriptParens start=/(/ end=/)/ contains=@javascriptEventExpression,@javascriptComments
 
-syntax match   javascriptArrowFuncDef          contained /([^)]*)\_s*=>/ contains=javascriptParens,javascriptFuncArg,javascriptFuncComma,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
-syntax match   javascriptArrowFuncDef          contained /[a-zA-Z_$][a-zA-Z0-9_$]*\_s*=>/ contains=javascriptArrowFuncArg,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
+syntax match   javascriptArrowFuncDef          /([^)]*)\_s*=>/ contains=javascriptParens,javascriptFuncArg,javascriptFuncComma,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
+syntax match   javascriptArrowFuncDef          /[a-zA-Z_$][a-zA-Z0-9_$]*\_s*=>/ contains=javascriptArrowFuncArg,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
 syntax match   javascriptArrowFunc             /=>/
 syntax match   javascriptArrowFuncArg          contained /[a-zA-Z_$]\k*/
 syntax keyword javascriptFuncKeyword           function nextgroup=javascriptAsyncFunc,javascriptSyncFunc
@@ -739,6 +741,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptSwitch               Conditional
   HiLink javascriptCase                 Conditional
   HiLink javascriptDefault              javascriptCase
+  HiLink javascriptExportDefault        javascriptCase
   HiLink javascriptBranch               Conditional
   HiLink javascriptIdentifier           Structure
   HiLink javascriptVariable             Identifier
