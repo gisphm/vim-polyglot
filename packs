@@ -5,6 +5,7 @@ c++11:octol/vim-cpp-enhanced-highlight
 cjsx:mtscout6/vim-cjsx
 clojure:guns/vim-clojure-static
 coffee-script:kchmck/vim-coffee-script
+colors:flazz/vim-colorschemes:_COLOR
 css:JulesWang/css.vim
 css-color:ap/vim-css-color
 css3:hail2u/vim-css3-syntax

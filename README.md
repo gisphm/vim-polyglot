@@ -27,6 +27,7 @@ A collection of language packs for Vim.
 - [cjsx](https://github.com/mtscout6/vim-cjsx) (ftdetect, syntax, ftplugin)
 - [clojure](https://github.com/guns/vim-clojure-static) (syntax, indent, autoload, ftplugin, ftdetect, doc)
 - [coffee-script](https://github.com/kchmck/vim-coffee-script) (syntax, indent, compiler, autoload, ftplugin, ftdetect, doc)
+- [colors](https://github.com/flazz/vim-colorschemes) (colors)
 - [css](https://github.com/JulesWang/css.vim) (syntax)
 - [css-color](https://github.com/ap/vim-css-color) (autoload, syntax)
 - [css3](https://github.com/hail2u/vim-css3-syntax) (syntax)
@@ -57,7 +58,7 @@ A collection of language packs for Vim.
 - [jinja](https://github.com/Glench/Vim-Jinja2-Syntax) (syntax, indent, ftdetect)
 - [jsdoc](https://github.com/heavenshell/vim-jsdoc) (autoload, ftplugin, doc)
 - [json](https://github.com/elzr/vim-json) (syntax, indent, ftplugin, ftdetect)
-- [jspc](https://github.com/othree/jspc.vim) (autoload, ftplugin)
+- [jspc](https://github.com/othree/jspc.vim) (data, autoload, ftplugin)
 - [jst](https://github.com/briancollins/vim-jst) (syntax, indent, ftdetect)
 - [jsx](https://github.com/mxw/vim-jsx) (ftdetect, after)
 - [julia](https://github.com/dcjones/julia-minimalist-vim) (syntax, indent, ftdetect)
@@ -106,7 +107,7 @@ A collection of language packs for Vim.
 - [vm](https://github.com/lepture/vim-velocity) (syntax, indent, ftdetect)
 - [xml](https://github.com/sukima/xmledit) (ftplugin, doc)
 - [yard](https://github.com/noprompt/vim-yardoc) (syntax)
-- [yajs](https://github.com/othree/yajs.vim) (syntax)
+- [yajs](https://github.com/othree/yajs.vim) (data, syntax)
 - [zsh](https://github.com/chrisbra/vim-zsh) (syntax, indent, ftplugin)
 
 ## Updating
