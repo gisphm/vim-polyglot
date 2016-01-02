@@ -30,6 +30,7 @@ A collection of language packs for Vim.
 - [css](https://github.com/JulesWang/css.vim) (syntax)
 - [css-color](https://github.com/ap/vim-css-color) (autoload, syntax)
 - [css3](https://github.com/hail2u/vim-css3-syntax) (syntax)
+- [csscomplete](https://github.com/othree/csscomplete.vim) (data, autoload)
 - [csv](https://github.com/chrisbra/csv.vim) (syntax, ftplugin, ftdetect, doc)
 - [cucumber](https://github.com/tpope/vim-cucumber) (syntax, indent, compiler, ftplugin, ftdetect)
 - [dockerfile](https://github.com/honza/dockerfile.vim) (syntax, ftdetect, doc)

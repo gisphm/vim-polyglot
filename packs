@@ -8,6 +8,7 @@ coffee-script:kchmck/vim-coffee-script
 css:JulesWang/css.vim
 css-color:ap/vim-css-color
 css3:hail2u/vim-css3-syntax
+csscomplete:othree/csscomplete.vim:_DATA
 csv:chrisbra/csv.vim
 cucumber:tpope/vim-cucumber
 dockerfile:honza/dockerfile.vim
