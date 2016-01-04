@@ -22,7 +22,7 @@ A collection of language packs for Vim.
 
 - [arduino](https://github.com/sudar/vim-arduino-syntax) (syntax, indent, ftdetect)
 - [asciidoc](https://github.com/asciidoc/vim-asciidoc) (syntax, ftdetect)
-- [blade](https://github.com/jwalton512/vim-blade) (syntax, indent, ftdetect)
+- [blade](https://github.com/jwalton512/vim-blade) (syntax, indent, ftplugin, ftdetect)
 - [c++11](https://github.com/octol/vim-cpp-enhanced-highlight) (syntax)
 - [cjsx](https://github.com/mtscout6/vim-cjsx) (ftdetect, syntax, ftplugin)
 - [clojure](https://github.com/guns/vim-clojure-static) (syntax, indent, autoload, ftplugin, ftdetect, doc)

@@ -1,7 +1,7 @@
 au BufRead,BufNewFile *.ino,*.pde set filetype=arduino
 autocmd BufNewFile,BufRead *.asciidoc,*.adoc
 	\ set ft=asciidoc
-au BufNewFile,BufRead *.blade.php set filetype=blade
+autocmd BufNewFile,BufRead *.blade.php set filetype=blade
 augroup CJSX
   au!
   autocmd BufNewFile,BufRead *.csx,*.cjsx set filetype=coffee
