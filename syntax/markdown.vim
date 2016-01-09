@@ -53,13 +53,11 @@ syn region mkdLink matchgroup=mkdDelimiter      start="\\\@<!!\?\[" end="\]\ze\s
 "                            ------------ _____________________ --------------------------- ________________________ ----------------- __
 syntax match   mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*/
 
-let s:protocols = 'coap\|doi\|javascript\|aaa\|aaas\|about\|acap\|cap\|cid\|crid\|data\|dav\|dict\|dns\|file\|ftp\|geo\|go\|gopher\|h323\|http\|https\|iax\|icap\|im\|imap\|info\|ipp\|iris\|iris.beep\|iris.xpc\|iris.xpcs\|iris.lwz\|ldap\|mailto\|mid\|msrp\|msrps\|mtqp\|mupdate\|news\|nfs\|ni\|nih\|nntp\|opaquelocktoken\|pop\|pres\|rtsp\|service\|session\|shttp\|sieve\|sip\|sips\|sms\|snmp,soap.beep\|soap.beeps\|tag\|tel\|telnet\|tftp\|thismessage\|tn3270\|tip\|tv\|urn\|vemmi\|ws\|wss\|xcon\|xcon-userid\|xmlrpc.beep\|xmlrpc.beeps\|xmpp\|z39.50r\|z39.50s\|adiumxtra\|afp\|afs\|aim\|apt,attachment\|aw\|beshare\|bitcoin\|bolo\|callto\|chrome,chrome-extension\|com-eventbrite-attendee\|content\|cvs,dlna-playsingle\|dlna-playcontainer\|dtn\|dvb\|ed2k\|facetime\|feed\|finger\|fish\|gg\|git\|gizmoproject\|gtalk\|hcp\|icon\|ipn\|irc\|irc6\|ircs\|itms\|jar\|jms\|keyparc\|lastfm\|ldaps\|magnet\|maps\|market,message\|mms\|ms-help\|msnim\|mumble\|mvn\|notes\|oid\|palm\|paparazzi\|platform\|proxy\|psyc\|query\|res\|resource\|rmi\|rsync\|rtmp\|secondlife\|sftp\|sgn\|skype\|smb\|soldat\|spotify\|ssh\|steam\|svn\|teamspeak\|things\|udp\|unreal\|ut2004\|ventrilo\|view-source\|webcal\|wtai\|wyciwyg\|xfire\|xri\|ymsgr'
-
 " Autolink with parenthesis.
-execute 'syn region mkdInlineURL matchgroup=mkdDelimiter start="\\\@<!(\(\(' . s:protocols . '\):\/\/[^) ]*)\)\@=" end=")"'
+syntax region  mkdInlineURL matchgroup=mkdDelimiter start="(\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*)\)\@=" end=")"
 
 " Autolink with angle brackets.
-execute 'syn region mkdInlineURL matchgroup=mkdDelimiter start="\\\@<!<\(\(' . s:protocols . '\):\/\/[^> ]*>\)\@=" end=">"'
+syn region mkdInlineURL matchgroup=mkdDelimiter start="\\\@<!<\(\(https\?\|ftp\|git\|coap\|doi\|javascript\|aaas\?\|about\|acap\|cap\|cid\|crid\|data\|dav\|dict\|dns\|file\|geo\|go\|gopher\|h323\|iax\|icap\|im\|imap\|info\|ipp\|iris\|iris.beep\|iris.xpc\|iris.xpcs\|iris.lwz\|ldaps\?\|mailto\|mid\|msrp\|msrps\|mtqp\|mupdate\|news\|nfs\|ni\|nih\|nntp\|opaquelocktoken\|pop\|pres\|rtsp\|service\|session\|shttp\|sieve\|sip\|sips\|sms\|snmp,soap.beep\|soap.beeps\|tag\|tel\|telnet\|tftp\|thismessage\|tn3270\|tip\|tv\|urn\|vemmi\|wss\?\|xcon\|xcon-userid\|xmlrpc.beep\|xmlrpc.beeps\|xmpp\|z39.50r\|z39.50s\|adiumxtra\|afp\|afs\|aim\|apt,attachment\|aw\|beshare\|bitcoin\|bolo\|callto\|chrome,chrome-extension\|com-eventbrite-attendee\|content\|cvs,dlna-playsingle\|dlna-playcontainer\|dtn\|dvb\|ed2k\|facetime\|feed\|finger\|fish\|gg\|gizmoproject\|gtalk\|hcp\|icon\|ipn\|irc6\|ircs\?\|itms\|jar\|jms\|keyparc\|lastfm\|magnet\|maps\|market,message\|mms\|ms-help\|msnim\|mumble\|mvn\|notes\|oid\|palm\|paparazzi\|platform\|proxy\|psyc\|query\|res\|resource\|rmi\|rsync\|rtmp\|secondlife\|sftp\|sgn\|skype\|smb\|soldat\|spotify\|ssh\|steam\|svn\|teamspeak\|things\|udp\|unreal\|ut2004\|ventrilo\|view-source\|webcal\|wtai\|wyciwyg\|xfire\|xri\|ymsgr'\):\/\/[^> ]*>\)\@=" end=">"
 
 " Link definitions: [id]: URL (Optional Title)
 syn region mkdLinkDef matchgroup=mkdDelimiter   start="^ \{,3}\zs\[" end="]:" oneline nextgroup=mkdLinkDefTarget skipwhite
@@ -81,9 +79,9 @@ syn region mkdCode         start="<pre[^>]*>"              end="</pre>"
 syn region mkdCode         start="<code[^>]*>"             end="</code>"
 syn region mkdFootnote     start="\[^"                     end="\]"
 syn match  mkdCode         /^\s*\n\(\(\s\{8,}[^ ]\|\t\t\+[^\t]\).*\n\)\+/
-syn match  mkdIndentCode   /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/ contained
+syn match  mkdCode         /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/ contained
 syn region mkdListItemLine matchgroup=mkdListItem start="^\s*\%([-*+]\|\d\+\.\)\s\+" end="$" contains=@mkdNonListItem,@Spell
-syn region mkdNonListItemBlock start="\n\(\_^\_$\|\s\{4,}[^ ]\|\t+[^\t]\)\@!" end="^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@=" contains=@mkdNonListItem,@Spell
+syn region mkdNonListItemBlock start="\(\%^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@!\|\n\(\_^\_$\|\s\{4,}[^ ]\|\t+[^\t]\)\@!\)" end="^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@=" contains=@mkdNonListItem,@Spell
 syn match  mkdRule         /^\s*\*\s\{0,1}\*\s\{0,1}\*$/
 syn match  mkdRule         /^\s*-\s\{0,1}-\s\{0,1}-$/
 syn match  mkdRule         /^\s*_\s\{0,1}_\s\{0,1}_$/
@@ -112,12 +110,11 @@ if get(g:, 'vim_markdown_math', 0)
   syn region mkdMath matchgroup=mkdDelimiter start="\\\@<!\$\$" end="\$\$" contains=@tex
 endif
 
-syn cluster mkdNonListItem contains=@htmlTop,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdIndentCode,mkdListItem,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath
+syn cluster mkdNonListItem contains=@htmlTop,htmlItalic,htmlBold,htmlBoldItalic,mkdFootnotes,mkdInlineURL,mkdLink,mkdLinkDef,mkdLineBreak,mkdBlockquote,mkdCode,mkdListItem,mkdRule,htmlH1,htmlH2,htmlH3,htmlH4,htmlH5,htmlH6,mkdMath
 
 "highlighting for Markdown groups
 HtmlHiLink mkdString        String
 HtmlHiLink mkdCode          String
-HtmlHiLink mkdIndentCode    String
 HtmlHiLink mkdFootnote      Comment
 HtmlHiLink mkdBlockquote    Comment
 HtmlHiLink mkdLineContinue  Comment
