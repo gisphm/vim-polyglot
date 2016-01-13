@@ -1,10 +1,12 @@
 " Vim completion script
-" Language:	CSS
-" Maintainer: Kao Wei-Ko(othree) <othree@gmail.com>
-" Original Author:	Mikolaj Machowski ( mikmach AT wp DOT pl )
-" Last Change:	2015 Dec 31
+" Language: CSS
+"           Based on MDN CSS Reference at 2016 Jan <https://developer.mozilla.org/en-US/docs/Web/CSS/Reference>
+"           plus CSS Speech Module <http://www.w3.org/TR/css3-speech/>
+" Maintainer: Kao, Wei-Ko(othree) ( othree AT gmail DOT com )
+" Original Author: Mikolaj Machowski ( mikmach AT wp DOT pl )
+" Last Change: 2016 Jan 11
 
-let s:values = split("additive-symbols align-content align-items align-self animation animation-delay animation-direction animation-duration animation-fill-mode animation-iteration-count animation-name animation-play-state animation-timing-function backface-visibility background background-attachment background-blend-mode background-clip background-color background-image background-origin background-position background-repeat background-size block-size border border-block-end border-block-end-color border-block-end-style border-block-end-width border-block-start border-block-start-color border-block-start-style border-block-start-width border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-inline-end border-inline-end-color border-inline-end-style border-inline-end-width border-inline-start border-inline-start-color border-inline-start-style border-inline-start-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-decoration-break box-shadow box-sizing break-after break-before break-inside caption-side clear clip clip-path color columns column-count column-fill column-gap column-rule column-rule-color column-rule-style column-rule-width column-span column-width content counter-increment counter-reset cursor direction display empty-cells fallback filter flex flex-basis flex-direction flex-flow flex-grow flex-shrink flex-wrap float font font-family font-feature-settings font-kerning font-language-override font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-variant-alternates font-variant-caps font-variant-east-asian font-variant-ligatures font-variant-numeric font-variant-position font-weight grid grid-area grid-auto-columns grid-auto-flow grid-auto-position grid-auto-rows grid-column grid-column-start grid-column-end grid-row grid-row-start grid-row-end grid-template grid-template-areas grid-template-rows grid-template-columns height hyphens image-rendering image-resolution image-orientation ime-mode inline-size isolation justify-content left letter-spacing line-break line-height list-style list-style-image list-style-position list-style-type margin margin-block-end margin-block-start margin-bottom margin-inline-end margin-inline-start margin-left margin-right margin-top marks mask mask-type max-block-size max-height max-inline-size max-width max-zoom min-block-size min-height min-inline-size min-width min-zoom mix-blend-mode negative object-fit object-position offset-block-end offset-block-start offset-inline-end offset-inline-start opacity order orientation orphans outline outline-color outline-offset outline-style outline-width overflow overflow-wrap overflow-x overflow-y pad padding padding-block-end padding-block-start padding-bottom padding-inline-end padding-inline-start padding-left padding-right padding-top page-break-after page-break-before page-break-inside perspective perspective-origin pointer-events position prefix quotes range resize right ruby-align ruby-merge ruby-position scroll-behavior scroll-snap-coordinate scroll-snap-destination scroll-snap-points-x scroll-snap-points-y scroll-snap-type scroll-snap-type-x scroll-snap-type-y shape-image-threshold shape-margin shape-outside speak-as suffix symbols system table-layout tab-size text-align text-align-last text-combine-upright text-decoration text-decoration-color text-decoration-line text-emphasis text-emphasis-color text-emphasis-position text-emphasis-style text-indent text-orientation text-overflow text-rendering text-shadow text-transform text-underline-position top touch-action transform transform-box transform-origin transform-style transition transition-delay transition-duration transition-property transition-timing-function unicode-bidi unicode-range user-zoom vertical-align visibility white-space widows width will-change word-break word-spacing word-wrap writing-mode z-index zoom")
+let s:values = split("all additive-symbols align-content align-items align-self animation animation-delay animation-direction animation-duration animation-fill-mode animation-iteration-count animation-name animation-play-state animation-timing-function backface-visibility background background-attachment background-blend-mode background-clip background-color background-image background-origin background-position background-repeat background-size block-size border border-block-end border-block-end-color border-block-end-style border-block-end-width border-block-start border-block-start-color border-block-start-style border-block-start-width border-bottom border-bottom-color border-bottom-left-radius border-bottom-right-radius border-bottom-style border-bottom-width border-collapse border-color border-image border-image-outset border-image-repeat border-image-slice border-image-source border-image-width border-inline-end border-inline-end-color border-inline-end-style border-inline-end-width border-inline-start border-inline-start-color border-inline-start-style border-inline-start-width border-left border-left-color border-left-style border-left-width border-radius border-right border-right-color border-right-style border-right-width border-spacing border-style border-top border-top-color border-top-left-radius border-top-right-radius border-top-style border-top-width border-width bottom box-decoration-break box-shadow box-sizing break-after break-before break-inside caption-side clear clip clip-path color columns column-count column-fill column-gap column-rule column-rule-color column-rule-style column-rule-width column-span column-width content counter-increment counter-reset cue cue-before cue-after cursor direction display empty-cells fallback filter flex flex-basis flex-direction flex-flow flex-grow flex-shrink flex-wrap float font font-family font-feature-settings font-kerning font-language-override font-size font-size-adjust font-stretch font-style font-synthesis font-variant font-variant-alternates font-variant-caps font-variant-east-asian font-variant-ligatures font-variant-numeric font-variant-position font-weight grid grid-area grid-auto-columns grid-auto-flow grid-auto-position grid-auto-rows grid-column grid-column-start grid-column-end grid-row grid-row-start grid-row-end grid-template grid-template-areas grid-template-rows grid-template-columns height hyphens image-rendering image-resolution image-orientation ime-mode inline-size isolation justify-content left letter-spacing line-break line-height list-style list-style-image list-style-position list-style-type margin margin-block-end margin-block-start margin-bottom margin-inline-end margin-inline-start margin-left margin-right margin-top marks mask mask-type max-block-size max-height max-inline-size max-width max-zoom min-block-size min-height min-inline-size min-width min-zoom mix-blend-mode negative object-fit object-position offset-block-end offset-block-start offset-inline-end offset-inline-start opacity order orientation orphans outline outline-color outline-offset outline-style outline-width overflow overflow-wrap overflow-x overflow-y pad padding padding-block-end padding-block-start padding-bottom padding-inline-end padding-inline-start padding-left padding-right padding-top page-break-after page-break-before page-break-inside pause-before pause-after pause perspective perspective-origin pointer-events position prefix quotes range resize rest rest-before rest-after right ruby-align ruby-merge ruby-position scroll-behavior scroll-snap-coordinate scroll-snap-destination scroll-snap-points-x scroll-snap-points-y scroll-snap-type scroll-snap-type-x scroll-snap-type-y shape-image-threshold shape-margin shape-outside speak speak-as suffix symbols system table-layout tab-size text-align text-align-last text-combine-upright text-decoration text-decoration-color text-decoration-line text-emphasis text-emphasis-color text-emphasis-position text-emphasis-style text-indent text-orientation text-overflow text-rendering text-shadow text-transform text-underline-position top touch-action transform transform-box transform-origin transform-style transition transition-delay transition-duration transition-property transition-timing-function unicode-bidi unicode-range user-zoom vertical-align visibility voice-balance voice-duration voice-family voice-pitch voice-rate voice-range voice-stress voice-volume white-space widows width will-change word-break word-spacing word-wrap writing-mode z-index zoom")
 
 
 function! csscomplete#CompleteCSS(findstart, base)
@@ -107,13 +109,16 @@ function! csscomplete#CompleteCSS(findstart, base)
     " Get name of property
     let prop = tolower(matchstr(line, '\zs[a-zA-Z-]*\ze\s*:[^:]\{-}$'))
 
+    let wide_keywords = ["initial", "inherit", "unset"]
     let color_values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
-    let border_type_values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
+    let border_style_values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
     let border_width_values = ["thin", "thick", "medium"]
     let list_style_type_values = ["decimal", "decimal-leading-zero", "arabic-indic", "armenian", "upper-armenian", "lower-armenian", "bengali", "cambodian", "khmer", "cjk-decimal", "devanagari", "georgian", "gujarati", "gurmukhi", "hebrew", "kannada", "lao", "malayalam", "mongolian", "myanmar", "oriya", "persian", "lower-roman", "upper-roman", "tamil", "telugu", "thai", "tibetan", "lower-alpha", "lower-latin", "upper-alpha", "upper-latin", "cjk-earthly-branch", "cjk-heavenly-stem", "lower-greek", "hiragana", "hiragana-iroha", "katakana", "katakana-iroha", "disc", "circle", "square", "disclosure-open", "disclosure-closed"]
     let timing_functions = ["cubic-bezier(", "steps(", "linear", "ease", "ease-in", "ease-in-out", "ease-out", "step-start", "step-end"]
 
-    if prop == 'additive-symbols'
+    if prop == 'all'
+      let values = []
+    elseif prop == 'additive-symbols'
       let values = []
     elseif prop == 'align-content'
       let values = ["flex-start", "flex-end", "center", "space-between", "space-around", "stretch"]
@@ -122,7 +127,7 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'align-self'
       let values = ["auto", "flex-start", "flex-end", "center", "baseline", "stretch"]
     elseif prop == 'animation'
-      let values = []
+      let values = timing_functions + ["normal", "reverse", "alternate", "alternate-reverse"] + ["none", "forwards", "backwards", "both"] + ["running", "paused"]
     elseif prop == 'animation-delay'
       let values = []
     elseif prop == 'animation-direction'
@@ -142,7 +147,7 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'background-attachment'
       let values = ["scroll", "fixed"]
     elseif prop == 'background-color'
-      let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+      let values = color_values
     elseif prop == 'background-image'
       let values = ["url(", "none"]
     elseif prop == 'background-position'
@@ -159,39 +164,30 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'background-size'
       let values = ["auto", "contain", "cover"]
     elseif prop == 'background'
-      let values = ["url(", "scroll", "fixed", "transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#", "none", "top", "center", "bottom" , "left", "right", "repeat", "repeat-x", "repeat-y", "no-repeat", "auto", "contain", "cover"]
-    elseif prop == 'border-style'
-      let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
-    elseif prop =~ 'border-\%(top\|right\|bottom\|left\|block-start\|block-end\)$'
+      let values = ["scroll", "fixed"] + color_values + ["url(", "none"] + ["top", "center", "bottom", "left", "right"] + ["repeat", "repeat-x", "repeat-y", "no-repeat"] + ["auto", "contain", "cover"]
+    elseif prop =~ 'border\%(-top\|-right\|-bottom\|-left\|-block-start\|-block-end\)\?$'
       let vals = matchstr(line, '.*:\s*\zs.*')
       if vals =~ '^\%([a-zA-Z0-9.]\+\)\?$'
-        let values = ["thin", "thick", "medium"]
+        let values = border_width_values
       elseif vals =~ '^[a-zA-Z0-9.]\+\s\+\%([a-zA-Z]\+\)\?$'
-        let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
+        let values = border_style_values
       elseif vals =~ '^[a-zA-Z0-9.]\+\s\+[a-zA-Z]\+\s\+\%([a-zA-Z(]\+\)\?$'
-        let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+        let values = color_values
       else
         return []
       endif
     elseif prop =~ 'border-\%(top\|right\|bottom\|left\|block-start\|block-end\)-color'
-      let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+      let values = color_values
     elseif prop =~ 'border-\%(top\|right\|bottom\|left\|block-start\|block-end\)-style'
-      let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
+      let values = border_style_values
     elseif prop =~ 'border-\%(top\|right\|bottom\|left\|block-start\|block-end\)-width'
-      let values = ["thin", "thick", "medium"]
+      let values = border_width_values
+    elseif prop == 'border-color'
+      let values = color_values
+    elseif prop == 'border-style'
+      let values = border_style_values
     elseif prop == 'border-width'
-      let values = ["thin", "thick", "medium"]
-    elseif prop == 'border'
-      let vals = matchstr(line, '.*:\s*\zs.*')
-      if vals =~ '^\%([a-zA-Z0-9.]\+\)\?$'
-        let values = ["thin", "thick", "medium"]
-      elseif vals =~ '^[a-zA-Z0-9.]\+\s\+\%([a-zA-Z]\+\)\?$'
-        let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
-      elseif vals =~ '^[a-zA-Z0-9.]\+\s\+[a-zA-Z]\+\s\+\%([a-zA-Z(]\+\)\?$'
-        let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
-      else
-        return []
-      endif
+      let values = border_width_values
     elseif prop == 'bottom'
       let values = ["auto"]
     elseif prop == 'box-decoration-break'
@@ -213,7 +209,7 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'clip-path'
       let values = ["fill-box", "stroke-box", "view-box", "none"]
     elseif prop == 'color'
-      let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+      let values = color_values
     elseif prop == 'columns'
       let values = []
     elseif prop == 'column-count'
@@ -223,11 +219,20 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'column-rule-color'
       let values = color_values
     elseif prop == 'column-rule-style'
-      let values = border_type_values
+      let values = border_style_values
     elseif prop == 'column-rule-width'
       let values = border_width_values
     elseif prop == 'column-rule'
-      let values = color_values + border_type_values + border_width_values
+      let vals = matchstr(line, '.*:\s*\zs.*')
+      if vals =~ '^\%([a-zA-Z0-9.]\+\)\?$'
+        let values = border_width_values
+      elseif vals =~ '^[a-zA-Z0-9.]\+\s\+\%([a-zA-Z]\+\)\?$'
+        let values = border_style_values
+      elseif vals =~ '^[a-zA-Z0-9.]\+\s\+[a-zA-Z]\+\s\+\%([a-zA-Z(]\+\)\?$'
+        let values = color_values
+      else
+        return []
+      endif
     elseif prop == 'column-span'
       let values = ["none", "all"]
     elseif prop == 'column-width'
@@ -236,6 +241,8 @@ function! csscomplete#CompleteCSS(findstart, base)
       let values = ["normal", "attr(", "open-quote", "close-quote", "no-open-quote", "no-close-quote"]
     elseif prop =~ 'counter-\%(increment\|reset\)$'
       let values = ["none"]
+    elseif prop =~ 'cue\%(-after\|-before\)\=$'
+      let values = ["url("]
     elseif prop == 'cursor'
       let values = ["url(", "auto", "crosshair", "default", "pointer", "move", "e-resize", "ne-resize", "nw-resize", "n-resize", "se-resize", "sw-resize", "s-resize", "w-resize", "text", "wait", "help", "progress"]
     elseif prop == 'direction'
@@ -349,15 +356,15 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'mix-blend-mode'
       let values = ["normal", "multiply", "screen", "overlay", "darken", "lighten", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"]
     elseif prop == 'opacity'
-      return []
+      let values = []
     elseif prop == 'orientation'
       let values = ["auto", "portrait", "landscape"]
     elseif prop == 'orphans'
-      return []
+      let values = []
     elseif prop == 'outline-offset'
       let values = []
     elseif prop == 'outline-color'
-      let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+      let values = color_values
     elseif prop == 'outline-style'
       let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
     elseif prop == 'outline-width'
@@ -365,7 +372,7 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'outline'
       let vals = matchstr(line, '.*:\s*\zs.*')
       if vals =~ '^\%([a-zA-Z0-9,()#]\+\)\?$'
-        let values = ["transparent", "rgb(", "rgba(", "hsl(", "hsla(", "#"]
+        let values = color_values
       elseif vals =~ '^[a-zA-Z0-9,()#]\+\s\+\%([a-zA-Z]\+\)\?$'
         let values = ["none", "hidden", "dotted", "dashed", "solid", "double", "groove", "ridge", "inset", "outset"]
       elseif vals =~ '^[a-zA-Z0-9,()#]\+\s\+[a-zA-Z]\+\s\+\%([a-zA-Z(]\+\)\?$'
@@ -378,17 +385,17 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop =~ 'overflow\%(-x\|-y\)\='
       let values = ["visible", "hidden", "scroll", "auto"]
     elseif prop == 'pad'
-      return []
+      let values = []
     elseif prop == 'padding'
-      return []
+      let values = []
     elseif prop =~ 'padding-\%(top\|right\|bottom\|left\|inline-start\|inline-end\|block-start\|block-end\)$'
-      return []
+      let values = []
     elseif prop =~ 'page-break-\%(after\|before\)$'
       let values = ["auto", "always", "avoid", "left", "right", "recto", "verso"]
     elseif prop == 'page-break-inside'
       let values = ["auto", "avoid"]
-    elseif prop =~ 'pause-\%(after\|before\)$'
-      return []
+    elseif prop =~ 'pause\%(-after\|-before\)\=$'
+      let values = ["none", "x-weak", "weak", "medium", "strong", "x-strong"]
     elseif prop == 'perspective'
       let values = ["none"]
     elseif prop == 'perspective-origin'
@@ -405,6 +412,8 @@ function! csscomplete#CompleteCSS(findstart, base)
       let values = ["auto", "infinite"]
     elseif prop == 'resize'
       let values = ["none", "both", "horizontal", "vertical"]
+    elseif prop =~ 'rest\%(-after\|-before\)\=$'
+      let values = ["none", "x-weak", "weak", "medium", "strong", "x-strong"]
     elseif prop == 'ruby-align'
       let values = ["start", "center", "space-between", "space-around"]
     elseif prop == 'ruby-merge'
@@ -422,19 +431,21 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'scroll-snap-type\%(-x\|-y\)\=$'
       let values = ["none", "mandatory", "proximity"]
     elseif prop == 'shape-image-threshold'
-      return []
+      let values = []
     elseif prop == 'shape-margin'
-      return []
+      let values = []
     elseif prop == 'shape-outside'
       let values = ["margin-box", "border-box", "padding-box", "content-box", 'inset(', 'circle(', 'ellipse(', 'polygon(', 'url(']
+    elseif prop == 'speak'
+      let values = ["auto", "none", "normal"]
     elseif prop == 'speak-as'
-      let values = ["auto", "bullets", "numbers", "words", "spell-out"]
+      let values = ["auto", "normal", "spell-out", "digits"]
     elseif prop == 'src'
       let values = ["url("]
     elseif prop == 'suffix'
-      return []
+      let values = []
     elseif prop == 'symbols'
-      return []
+      let values = []
     elseif prop == 'system'
       let vals = matchstr(line, '.*:\s*\zs.*')
       if vals =~ '^extends'
@@ -445,7 +456,7 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'table-layout'
       let values = ["auto", "fixed"]
     elseif prop == 'tab-size'
-      return []
+      let values = []
     elseif prop == 'text-align'
       let values = ["start", "end", "left", "right", "center", "justify", "match-parent"]
     elseif prop == 'text-align-last'
@@ -497,9 +508,9 @@ function! csscomplete#CompleteCSS(findstart, base)
     elseif prop == 'transition-property'
       let values = ["all", "none"] + s:values
     elseif prop == 'transition-duration'
-      return []
+      let values = []
     elseif prop == 'transition-delay'
-      return []
+      let values = []
     elseif prop == 'transition-timing-function'
       let values = timing_functions
     elseif prop == 'transition'
@@ -514,10 +525,26 @@ function! csscomplete#CompleteCSS(findstart, base)
       let values = ["baseline", "sub", "super", "top", "text-top", "middle", "bottom", "text-bottom"]
     elseif prop == 'visibility'
       let values = ["visible", "hidden", "collapse"]
+    elseif prop == 'voice-volume'
+      let values = ["silent", "x-soft", "soft", "medium", "loud", "x-loud"]
+    elseif prop == 'voice-balance'
+      let values = ["left", "center", "right", "leftwards", "rightwards"]
+    elseif prop == 'voice-family'
+      let values = []
+    elseif prop == 'voice-rate'
+      let values = ["normal", "x-slow", "slow", "medium", "fast", "x-fast"]
+    elseif prop == 'voice-pitch'
+      let values = ["absolute", "x-low", "low", "medium", "high", "x-high"]
+    elseif prop == 'voice-range'
+      let values = ["absolute", "x-low", "low", "medium", "high", "x-high"]
+    elseif prop == 'voice-stress'
+      let values = ["normal", "strong", "moderate", "none", "reduced "]
+    elseif prop == 'voice-duration'
+      let values = ["auto"]
     elseif prop == 'white-space'
       let values = ["normal", "pre", "nowrap", "pre-wrap", "pre-line"]
     elseif prop == 'widows'
-      return []
+      let values = []
     elseif prop == 'will-change'
       let values = ["auto", "scroll-position", "contents"] + s:values
     elseif prop == 'word-break'
@@ -543,6 +570,7 @@ function! csscomplete#CompleteCSS(findstart, base)
       endif
     endif
 
+    let values = wide_keywords + values
     " Complete values
     let entered_value = matchstr(line, '.\{-}\zs[a-zA-Z0-9#,.(_-]*$')
 
