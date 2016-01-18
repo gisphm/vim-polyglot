@@ -25,14 +25,12 @@ au BufRead,BufNewFile *.eex call s:setf('eelixir')
 au FileType elixir,eelixir setl sw=2 sts=2 et iskeyword+=!,?
 au BufNewFile,BufRead * call s:DetectElixir()
 function! s:setf(filetype) abort
-    if &filetype !=# a:filetype
-        let &filetype = a:filetype
-    endif
+  let &filetype = a:filetype
 endfunction
 function! s:DetectElixir()
-    if getline(1) =~ '^#!.*\<elixir\>'
-        call s:setf('elixir')
-    endif
+  if getline(1) =~ '^#!.*\<elixir\>'
+    call s:setf('elixir')
+  endif
 endfunction
 autocmd BufNewFile,BufRead *.em set filetype=ember-script
 autocmd FileType ember-script set tabstop=2|set shiftwidth=2|set expandtab
@@ -61,19 +59,22 @@ autocmd BufNewFile,BufRead *
 autocmd! BufNewFile,BufRead *.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes set filetype=glsl
 let s:current_fileformats = ''
 let s:current_fileencodings = ''
-function! s:gofiletype_pre()
+function! s:gofiletype_pre(type)
     let s:current_fileformats = &g:fileformats
     let s:current_fileencodings = &g:fileencodings
     set fileencodings=utf-8 fileformats=unix
-    setlocal filetype=go
+    let &l:filetype = a:type
 endfunction
 function! s:gofiletype_post()
     let &g:fileformats = s:current_fileformats
     let &g:fileencodings = s:current_fileencodings
 endfunction
 au BufNewFile *.go setfiletype go | setlocal fileencoding=utf-8 fileformat=unix
-au BufRead *.go call s:gofiletype_pre()
+au BufRead *.go call s:gofiletype_pre("go")
 au BufReadPost *.go call s:gofiletype_post()
+au BufNewFile *.s setfiletype asm | setlocal fileencoding=utf-8 fileformat=unix
+au BufRead *.s call s:gofiletype_pre("asm")
+au BufReadPost *.s call s:gofiletype_post()
 au BufRead,BufNewFile *.tmpl set filetype=gohtmltmpl
 au BufRead,BufNewFile *.gradle set filetype=gradle
 autocmd BufNewFile,BufRead *.haml,*.hamlbars,*.hamlc setf haml

@@ -550,7 +550,6 @@ syntax keyword javascriptMessage               alert confirm prompt status
 syntax keyword javascriptGlobal                self top parent
 
 "Statement Keywords
-syntax keyword javascriptExceptions            catch throw finally
 syntax keyword javascriptConditional           if else
 syntax keyword javascriptConditionalElse       else
 syntax keyword javascriptRepeat                do while for nextgroup=javascriptLoopParen skipwhite skipempty
@@ -693,7 +692,7 @@ syntax cluster javascriptSymbols               contains=javascriptOpSymbols,java
 " syntax match   javascriptWSymbols              contained /\_s\+/ nextgroup=@javascriptSymbols
 syntax region  javascriptEventFuncCallArg      contained matchgroup=javascriptParens start=/(/ end=/)/ contains=@javascriptEventExpression,@javascriptComments
 
-syntax match   javascriptArrowFuncDef          /(\_[^)]*)\_s*=>/ contains=javascriptParens,javascriptFuncArg,javascriptComma,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
+syntax match   javascriptArrowFuncDef          /(\_[^)]*)\_s*=>/ contains=javascriptFuncArg,javascriptComma,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
 syntax match   javascriptArrowFuncDef          /[a-zA-Z_$][a-zA-Z0-9_$]*\_s*=>/ contains=javascriptArrowFuncArg,javascriptArrowFunc nextgroup=javascriptOperator,javascriptIdentifierName,javascriptBlock,javascriptArrowFuncDef skipwhite skipempty
 syntax match   javascriptArrowFunc             /=>/
 syntax match   javascriptArrowFuncArg          contained /[a-zA-Z_$]\k*/
@@ -767,8 +766,8 @@ if exists("did_javascript_hilink")
   HiLink javascriptImport               Special
   HiLink javascriptImportAs             Special
   HiLink javascriptExport               Special
-  HiLink javascriptTry                  Special
-  HiLink javascriptExceptions           Special
+  HiLink javascriptTry                  Statement
+  HiLink javascriptExceptions           Statement
 
   HiLink javascriptMethodName           Function
   HiLink javascriptMethodAccessor       Operator
