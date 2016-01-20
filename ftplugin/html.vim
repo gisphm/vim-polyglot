@@ -5,6 +5,8 @@
 " Changes:      Add - to keyword
 
 " setlocal iskeyword+=-
+
+setlocal commentstring=<!--%s-->
 " Vim script file                                       vim600:fdm=marker:
 " FileType:   HTML
 " Maintainer: Devin Weaver <vim (at) tritarget.com>

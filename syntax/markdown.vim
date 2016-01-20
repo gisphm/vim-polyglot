@@ -34,19 +34,26 @@ syn spell toplevel
 syn case ignore
 syn sync linebreaks=1
 
+let s:conceal = ''
+let s:concealends = ''
+if has('conceal')
+  let s:conceal = ' conceal'
+  let s:concealends = ' concealends'
+endif
+
 "additions to HTML groups
-syn region htmlItalic start="\\\@<!\*\S\@=" end="\S\@<=\\\@<!\*" keepend oneline
-syn region htmlItalic start="\(^\|\s\)\@<=_\|\\\@<!_\([^_]\+\s\)\@=" end="\S\@<=[^\\]_\|[^\\]_\S\@=" keepend oneline
-syn region htmlBold start="\S\@<=\*\*\|\*\*\S\@=" end="\S\@<=\*\*\|\*\*\S\@=" keepend oneline
-syn region htmlBold start="\S\@<=__\|__\S\@=" end="\S\@<=__\|__\S\@=" keepend oneline
-syn region htmlBoldItalic start="\S\@<=\*\*\*\|\*\*\*\S\@=" end="\S\@<=\*\*\*\|\*\*\*\S\@=" keepend oneline
-syn region htmlBoldItalic start="\S\@<=___\|___\S\@=" end="\S\@<=___\|___\S\@=" keepend oneline
+syn region htmlItalic start="\%(^\|\s\)\zs\*\ze[^\\\*\t ]" end="[^\\\*\t ]\zs\*\ze\_W" keepend
+syn region htmlItalic start="\%(^\|\s\)\zs_\ze[^\\_\t ]" end="[^\\_\t ]\zs_\ze\_W" keepend
+syn region htmlBold start="\*\*\ze\S" end="\S\zs\*\*" keepend
+syn region htmlBold start="__\ze\S" end="\S\zs__" keepend
+syn region htmlBoldItalic start="\*\*\*\ze\S" end="\S\zs\*\*\*" keepend
+syn region htmlBoldItalic start="___\ze\S" end="\S\zs___" keepend
 
 " [link](URL) | [link][id] | [link][] | ![image](URL)
 syn region mkdFootnotes matchgroup=mkdDelimiter start="\[^"    end="\]"
-syn region mkdID matchgroup=mkdDelimiter        start="\["    end="\]" contained oneline
-syn region mkdURL matchgroup=mkdDelimiter       start="("     end=")"  contained oneline
-syn region mkdLink matchgroup=mkdDelimiter      start="\\\@<!!\?\[" end="\]\ze\s*[[(]" contains=@mkdNonListItem,@Spell nextgroup=mkdURL,mkdID skipwhite oneline
+execute 'syn region mkdID matchgroup=mkdDelimiter    start="\["    end="\]" contained oneline' . s:conceal
+execute 'syn region mkdURL matchgroup=mkdDelimiter   start="("     end=")"  contained oneline' . s:conceal
+execute 'syn region mkdLink matchgroup=mkdDelimiter  start="\\\@<!!\?\[" end="\n\{-,1}[^]]\{-}\zs\]\ze[[(]" contains=@mkdNonListItem,@Spell nextgroup=mkdURL,mkdID skipwhite oneline' . s:concealends
 
 " Autolink without angle brackets.
 " mkd  inline links:           protocol   optional  user:pass@       sub/domain                 .com, .co.uk, etc      optional port   path/querystring/hash fragment
@@ -57,7 +64,7 @@ syntax match   mkdInlineURL /https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A
 syntax region  mkdInlineURL matchgroup=mkdDelimiter start="(\(https\?:\/\/\(\w\+\(:\w\+\)\?@\)\?\([A-Za-z][-_0-9A-Za-z]*\.\)\{1,}\(\w\{2,}\.\?\)\{1,}\(:[0-9]\{1,5}\)\?\S*)\)\@=" end=")"
 
 " Autolink with angle brackets.
-syn region mkdInlineURL matchgroup=mkdDelimiter start="\\\@<!<\(\(https\?\|ftp\|git\|coap\|doi\|javascript\|aaas\?\|about\|acap\|cap\|cid\|crid\|data\|dav\|dict\|dns\|file\|geo\|go\|gopher\|h323\|iax\|icap\|im\|imap\|info\|ipp\|iris\|iris.beep\|iris.xpc\|iris.xpcs\|iris.lwz\|ldaps\?\|mailto\|mid\|msrp\|msrps\|mtqp\|mupdate\|news\|nfs\|ni\|nih\|nntp\|opaquelocktoken\|pop\|pres\|rtsp\|service\|session\|shttp\|sieve\|sip\|sips\|sms\|snmp,soap.beep\|soap.beeps\|tag\|tel\|telnet\|tftp\|thismessage\|tn3270\|tip\|tv\|urn\|vemmi\|wss\?\|xcon\|xcon-userid\|xmlrpc.beep\|xmlrpc.beeps\|xmpp\|z39.50r\|z39.50s\|adiumxtra\|afp\|afs\|aim\|apt,attachment\|aw\|beshare\|bitcoin\|bolo\|callto\|chrome,chrome-extension\|com-eventbrite-attendee\|content\|cvs,dlna-playsingle\|dlna-playcontainer\|dtn\|dvb\|ed2k\|facetime\|feed\|finger\|fish\|gg\|gizmoproject\|gtalk\|hcp\|icon\|ipn\|irc6\|ircs\?\|itms\|jar\|jms\|keyparc\|lastfm\|magnet\|maps\|market,message\|mms\|ms-help\|msnim\|mumble\|mvn\|notes\|oid\|palm\|paparazzi\|platform\|proxy\|psyc\|query\|res\|resource\|rmi\|rsync\|rtmp\|secondlife\|sftp\|sgn\|skype\|smb\|soldat\|spotify\|ssh\|steam\|svn\|teamspeak\|things\|udp\|unreal\|ut2004\|ventrilo\|view-source\|webcal\|wtai\|wyciwyg\|xfire\|xri\|ymsgr'\):\/\/[^> ]*>\)\@=" end=">"
+syn region mkdInlineURL matchgroup=mkdDelimiter start="\\\@<!<\ze[a-z][a-z0-9,.-]\{1,22}:\/\/[^> ]*>" end=">"
 
 " Link definitions: [id]: URL (Optional Title)
 syn region mkdLinkDef matchgroup=mkdDelimiter   start="^ \{,3}\zs\[" end="]:" oneline nextgroup=mkdLinkDefTarget skipwhite
@@ -65,6 +72,16 @@ syn region mkdLinkDefTarget start="<\?\zs\S" excludenl end="\ze[>[:space:]\n]"  
 syn region mkdLinkTitle matchgroup=mkdDelimiter start=+"+     end=+"+  contained
 syn region mkdLinkTitle matchgroup=mkdDelimiter start=+'+     end=+'+  contained
 syn region mkdLinkTitle matchgroup=mkdDelimiter start=+(+     end=+)+  contained
+
+"HTML headings
+syn region htmlH1       start="^\s*#"                   end="$" contains=@Spell
+syn region htmlH2       start="^\s*##"                  end="$" contains=@Spell
+syn region htmlH3       start="^\s*###"                 end="$" contains=@Spell
+syn region htmlH4       start="^\s*####"                end="$" contains=@Spell
+syn region htmlH5       start="^\s*#####"               end="$" contains=@Spell
+syn region htmlH6       start="^\s*######"              end="$" contains=@Spell
+syn match  htmlH1       /^.\+\n=\+$/ contains=@Spell
+syn match  htmlH2       /^.\+\n-\+$/ contains=@Spell
 
 "define Markdown groups
 syn match  mkdLineContinue ".$" contained
@@ -79,6 +96,7 @@ syn region mkdCode         start="<pre[^>]*>"              end="</pre>"
 syn region mkdCode         start="<code[^>]*>"             end="</code>"
 syn region mkdFootnote     start="\[^"                     end="\]"
 syn match  mkdCode         /^\s*\n\(\(\s\{8,}[^ ]\|\t\t\+[^\t]\).*\n\)\+/
+syn match  mkdCode         /\%^\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/
 syn match  mkdCode         /^\s*\n\(\(\s\{4,}[^ ]\|\t\+[^\t]\).*\n\)\+/ contained
 syn region mkdListItemLine matchgroup=mkdListItem start="^\s*\%([-*+]\|\d\+\.\)\s\+" end="$" contains=@mkdNonListItem,@Spell
 syn region mkdNonListItemBlock start="\(\%^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@!\|\n\(\_^\_$\|\s\{4,}[^ ]\|\t+[^\t]\)\@!\)" end="^\(\s*\([-*+]\|\d\+\.\)\s\+\)\@=" contains=@mkdNonListItem,@Spell
@@ -87,16 +105,6 @@ syn match  mkdRule         /^\s*-\s\{0,1}-\s\{0,1}-$/
 syn match  mkdRule         /^\s*_\s\{0,1}_\s\{0,1}_$/
 syn match  mkdRule         /^\s*-\{3,}$/
 syn match  mkdRule         /^\s*\*\{3,5}$/
-
-"HTML headings
-syn region htmlH1       start="^\s*#"                   end="$" contains=@Spell
-syn region htmlH2       start="^\s*##"                  end="$" contains=@Spell
-syn region htmlH3       start="^\s*###"                 end="$" contains=@Spell
-syn region htmlH4       start="^\s*####"                end="$" contains=@Spell
-syn region htmlH5       start="^\s*#####"               end="$" contains=@Spell
-syn region htmlH6       start="^\s*######"              end="$" contains=@Spell
-syn match  htmlH1       /^.\+\n=\+$/ contains=@Spell
-syn match  htmlH2       /^.\+\n-\+$/ contains=@Spell
 
 " YAML frontmatter
 if get(g:, 'vim_markdown_frontmatter', 0)
