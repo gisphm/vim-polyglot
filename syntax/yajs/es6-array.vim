@@ -1,5 +1,5 @@
 syntax keyword javascriptGlobal Array nextgroup=javascriptGlobalArrayDot,javascriptFuncCallArg
-syntax match   javascriptGlobalArrayDot /\./ contained nextgroup=javascriptArrayStaticMethod
+syntax match   javascriptGlobalArrayDot /\./ contained nextgroup=javascriptArrayStaticMethod,javascriptProp,javascriptMethod
 syntax keyword javascriptArrayStaticMethod contained from isArray of nextgroup=javascriptFuncCallArg
 if exists("did_javascript_hilink") | HiLink javascriptArrayStaticMethod Keyword
 endif

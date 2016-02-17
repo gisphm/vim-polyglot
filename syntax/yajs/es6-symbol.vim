@@ -1,5 +1,5 @@
 syntax keyword javascriptGlobal Symbol nextgroup=javascriptGlobalSymbolDot,javascriptFuncCallArg
-syntax match   javascriptGlobalSymbolDot /\./ contained nextgroup=javascriptSymbolStaticProp,javascriptSymbolStaticMethod
+syntax match   javascriptGlobalSymbolDot /\./ contained nextgroup=javascriptSymbolStaticProp,javascriptSymbolStaticMethod,javascriptProp,javascriptMethod
 syntax keyword javascriptSymbolStaticProp contained create hasInstance isConcatSpreadable
 syntax keyword javascriptSymbolStaticProp contained isRegExp iterator toPrimitive
 syntax keyword javascriptSymbolStaticProp contained toStringTag unscopables

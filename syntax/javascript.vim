@@ -400,14 +400,17 @@ syntax match   javascriptOpSymbol              contained /!\+/ nextgroup=javascr
 syntax match   javascriptOpSymbol              contained /\(!==\|!=\)/ " 2
 syntax match   javascriptOpSymbol              contained /\(>>>=\|>>>\|>>=\|>>\|>=\|>\)/ " 6
 syntax match   javascriptOpSymbol              contained /\(<<=\|<<\|<=\|<\)/ " 4
-syntax match   javascriptOpSymbol              contained /\(++\|+=\|+\)/ " 3
-syntax match   javascriptOpSymbol              contained /\(--\|-=\|-\)/ " 3
+syntax match   javascriptOpSymbol              contained /\(+=\|+\)/ " 2
+syntax match   javascriptOpSymbol              contained /\(-=\|-\)/ " 2
 syntax match   javascriptOpSymbol              contained /\(||\||=\||\)/ " 3
 syntax match   javascriptOpSymbol              contained /\(&&\|&=\|&\)/ " 3
 syntax match   javascriptOpSymbol              contained /\(*=\|*\)/ " 2
 syntax match   javascriptOpSymbol              contained /\(%=\|%\)/ " 2
 syntax match   javascriptOpSymbol              contained /\(\/=\|\/\)/ " 2
 syntax match   javascriptOpSymbol              contained /\(\^\|\~\)/ " 2
+
+syntax match   javascriptOpSymbols             /\(++\|--\)/ " contains=javascriptOpSymbol
+" syntax match   javascriptOpSymbol              contained /\(++\|--\)/ " 2
 
 " 37 operators
 " syntax match   javascriptOpSymbol              contained /\(<\|>\|<=\|>=\|==\|!=\|===\|!==\|+\|*\|%\|++\|--\|<<\|>>\|>>>\|&\||\|^\|!\|\~\|&&\|||\|?\|=\|+=\|-=\|*=\|%=\|<<=\|>>=\|>>>=\|&=\||=\|^=\|\/\|\/=\)/ nextgroup=javascriptInvalidOp skipwhite skipempty

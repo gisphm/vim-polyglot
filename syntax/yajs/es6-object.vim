@@ -1,5 +1,5 @@
 syntax keyword javascriptGlobal Object nextgroup=javascriptGlobalObjectDot,javascriptFuncCallArg
-syntax match   javascriptGlobalObjectDot /\./ contained nextgroup=javascriptObjectStaticMethod
+syntax match   javascriptGlobalObjectDot /\./ contained nextgroup=javascriptObjectStaticMethod,javascriptProp,javascriptMethod
 syntax keyword javascriptObjectStaticMethod contained create defineProperties defineProperty nextgroup=javascriptFuncCallArg
 syntax keyword javascriptObjectStaticMethod contained freeze getOwnPropertyDescriptor nextgroup=javascriptFuncCallArg
 syntax keyword javascriptObjectStaticMethod contained getOwnPropertyNames getOwnPropertySymbols nextgroup=javascriptFuncCallArg

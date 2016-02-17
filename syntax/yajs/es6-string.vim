@@ -1,5 +1,5 @@
 syntax keyword javascriptGlobal String nextgroup=javascriptGlobalStringDot,javascriptFuncCallArg
-syntax match   javascriptGlobalStringDot /\./ contained nextgroup=javascriptStringStaticMethod
+syntax match   javascriptGlobalStringDot /\./ contained nextgroup=javascriptStringStaticMethod,javascriptProp,javascriptMethod
 syntax keyword javascriptStringStaticMethod contained fromCharCode fromCodePoint nextgroup=javascriptFuncCallArg
 if exists("did_javascript_hilink") | HiLink javascriptStringStaticMethod Keyword
 endif
