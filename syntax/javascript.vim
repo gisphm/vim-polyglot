@@ -501,8 +501,8 @@ syntax region  javascriptTemplateSubstitution  contained matchgroup=javascriptTe
 syntax region  javascriptTemplateSBlock        contained start=/{/ end=/}/ contains=javascriptTemplateSBlock,javascriptTemplateSString transparent
 syntax region  javascriptTemplateSString       contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ extend contains=javascriptTemplateSStringRB transparent
 syntax match   javascriptTemplateSStringRB     /}/ contained 
-syntax region  javascriptString                start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ nextgroup=@javascriptComments skipwhite skipempty
-syntax region  javascriptTemplate              start=/`/  skip=/\\\\\|\\`\|\n/  end=/`\|$/ contains=javascriptTemplateSubstitution nextgroup=@javascriptComments,javascriptOpSymbols skipwhite skipempty
+syntax region  javascriptString                start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ nextgroup=@javascriptComments skipwhite skipempty extend
+syntax region  javascriptTemplate              start=/`/  skip=/\\\\\|\\`\|\n/  end=/`\|$/ contains=javascriptTemplateSubstitution nextgroup=@javascriptComments,javascriptOpSymbols skipwhite skipempty extend
 " syntax match   javascriptTemplateTag           /\k\+/ nextgroup=javascriptTemplate
 syntax region  javascriptArray                 matchgroup=javascriptBrackets start=/\[/ end=/]/ contains=@javascriptValue,javascriptComma,javascriptForComprehension,@javascriptComments nextgroup=@javascriptComments,javascriptOpSymbols,@javascriptAfterIdentifier skipwhite skipempty
 
@@ -625,7 +625,7 @@ runtime syntax/yajs/event.vim
 syntax region  javascriptEventString           contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ contains=javascriptASCII,@events
 
 "Import
-syntax region  javascriptImportDef             start=/import/ end=/;\|\n/ contains=javascriptImport,javascriptImportBlock,javascriptString,javascriptEndColons
+syntax region  javascriptImportDef             start=/import/ end=/;\|\n/ contains=javascriptImport,javascriptImportBlock,javascriptString,javascriptEndColons keepend
 syntax keyword javascriptImport                contained from as import
 syntax keyword javascriptImportAs              contained as
 syntax region  javascriptImportBlock           matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=javascriptImportAs
