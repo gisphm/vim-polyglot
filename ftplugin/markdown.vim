@@ -357,11 +357,11 @@ function! s:Toc(...)
             endif
         endif
     endfor
+    call setloclist(0, l:header_list)
     if len(l:header_list) == 0
         echom "Toc: No headers."
         return
     endif
-    call setloclist(0, l:header_list)
 
     if l:window_type ==# 'horizontal'
         lopen
@@ -456,11 +456,16 @@ function! s:TableFormat()
     " Search instead of `normal! j` because of the table at beginning of file edge case.
     call search('|')
     normal! j
-    " Remove everything that is not a pipe othewise well formated tables would grow
-    " because of addition of 2 spaces on the separator line by Tabularize /|.
+    " Remove everything that is not a pipe, colon or hyphen next to a colon othewise
+    " well formated tables would grow because of addition of 2 spaces on the separator
+    " line by Tabularize /|.
     let l:flags = (&gdefault ? '' : 'g')
-    execute 's/[^|]//' . l:flags
+    execute 's/\(:\@<!-:\@!\|[^|:-]\)//e' . l:flags
+    execute 's/--/-/e' . l:flags
     Tabularize /|
+    " Move colons for alignment to left or right side of the cell.
+    execute 's/:\( \+\)|/\1:|/e' . l:flags
+    execute 's/|\( \+\):/|:\1/e' . l:flags
     execute 's/ /-/' . l:flags
     call setpos('.', l:pos)
 endfunction
@@ -635,7 +640,7 @@ function! s:MarkdownHighlightSources(force)
     " Look for code blocks in the current file
     let filetypes = {}
     for line in getline(1, '$')
-        let ft = matchstr(line, '```\zs[0-9A-Za-z_+-]*')
+        let ft = matchstr(line, '```\s*\zs[0-9A-Za-z_+-]*')
         if !empty(ft) && ft !~ '^\d*$' | let filetypes[ft] = 1 | endif
     endfor
     if !exists('b:mkd_known_filetypes')
@@ -666,7 +671,7 @@ function! s:MarkdownHighlightSources(force)
             else
                 let include = '@' . toupper(filetype)
             endif
-            let command = 'syntax region %s matchgroup=%s start="^\s*```%s$" matchgroup=%s end="\s*```$" keepend contains=%s%s'
+            let command = 'syntax region %s matchgroup=%s start="^\s*```\s*%s$" matchgroup=%s end="\s*```$" keepend contains=%s%s'
             execute printf(command, group, startgroup, ft, endgroup, include, has('conceal') && get(g:, 'vim_markdown_conceal', 1) ? ' concealends' : '')
             execute printf('syntax cluster mkdNonListItem add=%s', group)
 
