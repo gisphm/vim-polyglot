@@ -92,7 +92,7 @@ A collection of language packs for Vim.
 - [slim](https://github.com/slim-template/vim-slim) (syntax, indent, ftdetect)
 - [snippets](https://github.com/gisphm/vim-snippets-neosnippet) (neosnippets)
 - [solidity](https://github.com/ethereum/vim-solidity) (syntax, indent, ftdetect)
-- [sql](https://github.com/gisphm/dbext.vim) (autoload, doc)
+- [sql](https://github.com/vim-scripts/dbext.vim) (autoload, doc)
 - [stylus](https://github.com/wavded/vim-stylus) (syntax, indent, ftplugin, ftdetect)
 - [swift](https://github.com/keith/swift.vim) (syntax, indent, ftplugin, ftdetect)
 - [systemd](https://github.com/kurayama/systemd-vim-syntax) (syntax, ftdetect)
