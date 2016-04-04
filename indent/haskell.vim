@@ -58,7 +58,8 @@ if !exists('g:haskell_indent_guard')
 endif
 
 setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=0{,0},!^F,o,O,0\|,0\=,0=where,0=let,0=deriving,0=->,0=\=>,<Space>
+setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
+setlocal indentkeys=!^F,o,O,,0{,0},0(,0),0[,0],0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
 
 function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1
@@ -152,7 +153,7 @@ function! GetHaskellIndent()
 
   " let x = 1 in
   " >>>>x
-  if l:prevline =~ '\C\<let\>\s\+.\+\<in\>\?\s*$'
+  if l:prevline =~ '\C\<let\>\s\+.\+\<in\>\?$' && l:line !~ '\C^\s*\<in\>'
     return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
   endif
 
@@ -167,7 +168,7 @@ function! GetHaskellIndent()
   if l:prevline =~ '\C\<let\>\s\+.\+$'
     if l:line =~ '\C^\s*\<let\>'
       return match(l:prevline, '\C\<let\>')
-    elseif l:line =~ '\C^\s*\<in\> '
+    elseif l:line =~ '\C^\s*\<in\>'
       return match(l:prevline, '\C\<let\>') + g:haskell_indent_in
     else
       return match(l:prevline, '\C\<let\>') + g:haskell_indent_let
@@ -328,7 +329,7 @@ function! GetHaskellIndent()
   " let x = 1
   "     y = 2
   " >in x + 1
-  if l:line =~ '\C^\s*\<in\>\s'
+  if l:line =~ '\C^\s*\<in\>'
     return match(l:prevline, '\S') - (4 - g:haskell_indent_in)
   endif
 
@@ -396,12 +397,6 @@ function! GetHaskellIndent()
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
-  "   bar
-  " _ -> quux
-  if l:line =~ '^\s*[^\\]\+\s\+->\s\+' && l:prevline !~ '^\s*[^\\]\+\s\+->\s\+'
-    return match(l:prevline, '\S') - g:haskell_indent_case
-  endif
-
   " indent closing brace, paren or bracket
   if l:line =~ '^\s*}'
     return s:indentMatching('}')
@@ -422,6 +417,10 @@ function! GetHaskellIndent()
 
   " do not reindent indented lines
   if match(l:prevline, '\S') < match(l:line, '\S')
+    return -1
+  endif
+
+  if l:line !~ '^\s*[=-]>\s' && l:line =~ '^\s*[!#$%&*+./<>?@\\^|~-]\+'
     return -1
   endif
 
