@@ -47,7 +47,7 @@ easily.
   * Automatic `GOPATH` detection based on the directory structure (i.e. `gb`
     projects, `godep` vendored projects)
   * Change or display `GOPATH` with `:GoPath`
-  * Create a coverage profile and display annotated source code in browser to see
+  * Create a coverage profile and display annotated source code in to see
     which functions are covered with `:GoCoverage`
   * Call `gometalinter` with `:GoMetaLinter`, which invokes all possible linters
     (golint, vet, errcheck, deadcode, etc..) and shows the warnings/errors
@@ -989,7 +989,13 @@ also enabled. By default it's enabled. >
 
 	let g:go_highlight_string_spellcheck = 1
 <
+                                        *'g:go_highlight_format_strings*
 
+Use this option to highlight printf-style operators inside string literals.
+By default it's enabled. >
+
+	let g:go_highlight_format_strings = 1
+<
                                                 *'g:go_autodetect_gopath'*
 
 Automatically modifies GOPATH for certain directory structures, such as for
