@@ -58,8 +58,7 @@ if !exists('g:haskell_indent_guard')
 endif
 
 setlocal indentexpr=GetHaskellIndent()
-setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
-setlocal indentkeys=!^F,o,O,,0{,0},0(,0),0[,0],0\|,0\=,0=where,0=let,0=in\ ,0=deriving,0=->,0=\=>,0\,
+setlocal indentkeys=0{,0},0(,0),0[,0],!^F,o,O,0\=,0=where,0=let,0=deriving,0\,,<space>
 
 function! s:isInBlock(hlstack)
   return index(a:hlstack, 'haskellParens') > -1 || index(a:hlstack, 'haskellBrackets') > -1 || index(a:hlstack, 'haskellBlock') > -1
@@ -76,7 +75,7 @@ endfunction
 " indent matching character
 function! s:indentMatching(char)
   normal! 0
-  call search(a:char, 'c')
+  call search(a:char, 'cW')
   normal! %
   return col('.') - 1
 endfunction
@@ -312,7 +311,7 @@ function! GetHaskellIndent()
 
   " foo
   " >>{
-  if l:line =~ '^\s*{'
+  if l:line =~ '^\s*{' && l:prevline !~ '^{'
     return match(l:prevline, '\S') + &shiftwidth
   endif
 
@@ -364,12 +363,12 @@ function! GetHaskellIndent()
   if l:line =~ '^\s*,'
     if s:isInBlock(l:hlstack)
       normal! 0
-      call search(',', 'c')
-      let l:n = s:getNesting(l:hlstack)
-      call search('[(\[{]', 'b')
+      call search(',', 'cW')
+      let l:n = s:getNesting(s:getHLStack())
+      call search('[(\[{]', 'bW')
 
       while l:n != s:getNesting(s:getHLStack())
-        call search('[(\[{]', 'b')
+        call search('[(\[{]', 'bW')
       endwhile
 
       return col('.') - 1
