@@ -681,7 +681,7 @@ syntax match   javascriptDefaultAssign         contained /=/ nextgroup=@javascri
 
 
 "Class
-syntax keyword javascriptClassKeyword          class nextgroup=javascriptClassName skipwhite
+syntax keyword javascriptClassKeyword          class nextgroup=javascriptClassName,javascriptClassBlock,javascriptClassExtends skipwhite
 syntax keyword javascriptClassSuper            super
 syntax match   javascriptClassName             contained /\k\+/ nextgroup=javascriptClassBlock,javascriptClassExtends skipwhite
 syntax match   javascriptClassSuperName        contained /[a-zA-Z_$][a-zA-Z_$\[\]\.]*/ nextgroup=javascriptClassBlock skipwhite

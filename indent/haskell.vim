@@ -282,12 +282,17 @@ function! GetHaskellIndent()
   " foo
   "
   "   | foo
-  "   , bar
+  " >>, bar
   "
   "   | foo
-  "   = bar
+  " >>= bar
+  "
+  "   | Foo
+  " >>deriving
   if l:prevline =~ '^\s\+|' && !s:isInBlock(l:hlstack)
     if l:line =~ '\s*[,=]'
+      return match(l:prevline, '|')
+    elseif l:line =~ '\C^\s*\<deriving\>'
       return match(l:prevline, '|')
     elseif l:line !~ '^\s*|'
       return match(l:prevline, '|') - g:haskell_indent_guard
@@ -383,11 +388,18 @@ function! GetHaskellIndent()
   "   |
   "   ...
   " >>|
+  "
+  " data Foo = Bar
+  " >>>>>>>>>|
   if l:line =~ '^\s*|\s'
-    let l:s = s:indentGuard(match(l:line, '|'), l:prevline)
-    if l:s > -1
-      return l:s
-    end
+    if l:prevline =~ '\C^\s*\<data\>.\+=.\+$'
+      return match(l:prevline, '=')
+    else
+      let l:s = s:indentGuard(match(l:line, '|'), l:prevline)
+      if l:s > -1
+        return l:s
+      endif
+    endif
   endif
 
   " foo
