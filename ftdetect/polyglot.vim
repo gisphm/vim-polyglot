@@ -261,7 +261,7 @@ autocmd BufNewFile,BufRead *.slim set filetype=slim
 au BufNewFile,BufRead *.sol setf solidity
 autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
 autocmd BufNewFile,BufReadPost *.stylus set filetype=stylus
-autocmd BufNewFile,BufRead *.swift setfiletype swift
+autocmd BufNewFile,BufRead *.swift set filetype=swift
 autocmd BufRead * call s:Swift()
 function! s:Swift()
   if !empty(&filetype)
