@@ -90,7 +90,7 @@ A collection of language packs for Vim.
 - [scala](https://github.com/derekwyatt/vim-scala) (syntax, indent, compiler, ftplugin, ftdetect, doc)
 - [scss](https://github.com/cakebaker/scss-syntax.vim) (syntax, autoload, ftplugin, ftdetect)
 - [slim](https://github.com/slim-template/vim-slim) (syntax, indent, ftdetect)
-- [snippets](https://github.com/gisphm/vim-snippets-neosnippet) (neosnippets)
+- [snippets](https://github.com/gisphm/vim-snippets-neosnippet) (autoload, neosnippets)
 - [solidity](https://github.com/ethereum/vim-solidity) (syntax, indent, ftdetect)
 - [sql](https://github.com/vim-scripts/dbext.vim) (autoload, doc)
 - [stylus](https://github.com/wavded/vim-stylus) (syntax, indent, ftplugin, ftdetect)
