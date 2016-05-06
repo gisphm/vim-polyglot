@@ -530,8 +530,7 @@ syntax cluster javascriptNoReserved            contains=@javascriptStrings,@java
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved break catch class const continue
 syntax keyword javascriptReservedCase          containedin=ALLBUT,@javascriptNoReserved,javascriptCaseBlock case
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved debugger default delete do else export
-syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved extends finally for function if 
-"import,javascriptRegexpString,javascriptPropertyName
+syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved extends finally for function if  import
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved in instanceof let new return super
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved switch throw try typeof var
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved void while with yield
@@ -550,7 +549,10 @@ syntax keyword javascriptPrototype             prototype
 "Program Keywords
 syntax keyword javascriptIdentifier            arguments this nextgroup=@javascriptAfterIdentifier
 syntax keyword javascriptVariable              let var const
-syntax keyword javascriptOperator              delete new instanceof typeof void in nextgroup=@javascriptValue,@javascriptTypes skipwhite skipempty
+syntax keyword javascriptOperator              delete instanceof typeof void in nextgroup=@javascriptValue,@javascriptTypes skipwhite skipempty
+syntax keyword javascriptOperator              new nextgroup=javascriptNewTarget,@javascriptValue,@javascriptTypes skipwhite skipempty
+syntax match   javascriptNewTarget             contained /.target/ contains=javascriptTarget
+syntax keyword javascriptTarget                contained target
 syntax keyword javascriptForOperator           contained in of
 syntax keyword javascriptBoolean               true false nextgroup=@javascriptComments skipwhite skipempty
 syntax keyword javascriptNull                  null undefined nextgroup=@javascriptComments skipwhite skipempty
@@ -567,6 +569,9 @@ syntax keyword javascriptStatementKeyword      with yield
 syntax keyword javascriptReturn                return nextgroup=@javascriptValue,javascriptClassSuper skipwhite
 syntax keyword javascriptYield                 yield nextgroup=javascriptYieldGen skipwhite
 syntax match   javascriptYieldGen              contained /\*/
+
+syntax keyword javascriptImport                from as import
+syntax keyword javascriptExport                export from default
 
 syntax keyword javascriptTry                   try
 syntax keyword javascriptExceptions            catch throw finally
@@ -599,6 +604,7 @@ runtime syntax/yajs/es6-function.vim
 runtime syntax/yajs/es6-math.vim
 runtime syntax/yajs/es6-date.vim
 runtime syntax/yajs/es6-json.vim
+runtime syntax/yajs/es6-reflect.vim
 runtime syntax/yajs/es6-regexp.vim
 runtime syntax/yajs/es6-map.vim
 runtime syntax/yajs/es6-set.vim
@@ -629,14 +635,6 @@ let javascript_props = 1
 runtime syntax/yajs/event.vim
 syntax region  javascriptEventString           contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ contains=javascriptASCII,@events
 
-"Import
-syntax region  javascriptImportDef             start=/import/ end=/;\|\n/ contains=javascriptImport,javascriptImportBlock,javascriptString,javascriptEndColons keepend
-syntax keyword javascriptImport                contained from as import
-syntax keyword javascriptImportAs              contained as
-syntax region  javascriptImportBlock           matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=javascriptImportAs extend
-syntax keyword javascriptExport                export nextgroup=javascriptExportDefault skipwhite
-syntax keyword javascriptExport                module
-syntax keyword javascriptExportDefault         contained default
 
 if &filetype =~ 'javascript'
   syntax region  javascriptBlock                 matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=TOP fold
@@ -768,6 +766,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptYieldGen             Statement
   HiLink javascriptMessage              Keyword
   HiLink javascriptOperator             Identifier
+  HiLink javascriptTarget               Identifier
   " HiLink javascriptType                 Type
   HiLink javascriptNull                 Boolean
   HiLink javascriptNumber               Number
@@ -776,7 +775,6 @@ if exists("did_javascript_hilink")
   HiLink javascriptLabel                Label
   HiLink javascriptPropertyName         Label
   HiLink javascriptImport               Special
-  HiLink javascriptImportAs             Special
   HiLink javascriptExport               Special
   HiLink javascriptTry                  Statement
   HiLink javascriptExceptions           Statement
