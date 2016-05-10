@@ -1,7 +1,7 @@
 " File: jsdoc.vim
 " Author: NAKAMURA, Hisashi <https://github.com/sunvisor>
 " Modifyed: Shinya Ohyanagi <sohyanagi@gmail.com>
-" Version:  0.9.0
+" Version:  0.9.1
 " WebPage:  http://github.com/heavenshell/vim-jsdoc/
 " Description: Generate JSDoc to your JavaScript file.
 " License: BSD, see LICENSE for more details.
@@ -52,7 +52,25 @@ call extend(g:jsdoc_tags, s:jsdoc_default_tags, 'keep')
 
 " Return data types for argument type auto completion :)
 function! jsdoc#listDataTypes(A, L, P) abort
-  let l:types = ['boolean', 'null', 'undefined', 'number', 'string', 'symbol', 'object', 'function', 'array']
+  let l:types = [
+      \ 'null', 'undefined',
+      \ 'boolean', 'Boolean',
+      \ 'number', 'Number',
+      \ 'string', 'String',
+      \ 'symbol', 'Symbol',
+      \ 'object', 'Object',
+      \ 'function', 'Function',
+      \ 'array', 'Array',
+      \ 'regexp', 'RegExp',
+      \ 'date', 'Date',
+      \ 'error', 'Error',
+      \ 'map', 'Map',
+      \ 'promise', 'Promise',
+      \ 'proxy', 'Proxy',
+      \ 'set', 'Set',
+      \ 'typedArray', 'TypedArray',
+      \ 'weakmap', 'WeakMap',
+      \ 'weakset', 'WeakSet']
   return join(l:types, "\n")
 endfunction
 

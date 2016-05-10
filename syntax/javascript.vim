@@ -490,7 +490,7 @@ syntax case match
 
 syntax cluster javascriptAfterIdentifier       contains=javascriptDotNotation,javascriptFuncCallArg,javascriptComputedProperty,javascriptOpSymbols,@javascriptComments
 " syntax match   javascriptIdentifierName        /\<[^=<>!?+\-*\/%|&,;:. ~@#`"'\[\]\(\)\{\}\^0-9][^=<>!?+\-*\/%|&,;:. ~@#`"'\[\]\(\)\{\}\^]*/ nextgroup=@javascriptAfterIdentifier contains=@_semantic skipwhite skipempty
-syntax match   javascriptIdentifierName        /\<[a-zA-Z_$]\k*/ nextgroup=@javascriptAfterIdentifier contains=javascriptGlobal,@_semantic skipwhite skipempty
+syntax match   javascriptIdentifierName        /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=@javascriptAfterIdentifier contains=javascriptGlobal,@_semantic skipwhite skipempty
 " runtime syntax/semhl.vim
 
 "Block VariableStatement EmptyStatement ExpressionStatement IfStatement IterationStatement ContinueStatement BreakStatement ReturnStatement WithStatement LabelledStatement SwitchStatement ThrowStatement TryStatement DebuggerStatement
@@ -546,6 +546,9 @@ syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoR
 "JavaScript Prototype
 syntax keyword javascriptPrototype             prototype
 
+syntax keyword javascriptImport                from as import
+syntax keyword javascriptExport                export from default
+
 "Program Keywords
 syntax keyword javascriptIdentifier            arguments this nextgroup=@javascriptAfterIdentifier
 syntax keyword javascriptVariable              let var const
@@ -564,27 +567,24 @@ syntax keyword javascriptRepeat                do while for nextgroup=javascript
 syntax keyword javascriptBranch                break continue
 syntax keyword javascriptSwitch                switch nextgroup=javascriptSwitchExpression skipwhite skipempty
 syntax keyword javascriptCase                  contained case
-syntax keyword javascriptDefault               default nextgroup=javascriptCaseColon skipwhite skipempty
+syntax keyword javascriptDefault               contained default nextgroup=javascriptCaseColon skipwhite skipempty
 syntax keyword javascriptStatementKeyword      with yield
 syntax keyword javascriptReturn                return nextgroup=@javascriptValue,javascriptClassSuper skipwhite
 syntax keyword javascriptYield                 yield nextgroup=javascriptYieldGen skipwhite
 syntax match   javascriptYieldGen              contained /\*/
 
-syntax keyword javascriptImport                from as import
-syntax keyword javascriptExport                export from default
-
 syntax keyword javascriptTry                   try
 syntax keyword javascriptExceptions            catch throw finally
 syntax keyword javascriptDebugger              debugger
 
-syntax region  javascriptSwitchExpression      contained start=/(/ end=/)/ matchgroup=javascriptParens contains=javascriptFuncKeyword,javascriptComma,javascriptDefaultAssign,@javascriptComments nextgroup=javascriptCaseBlock skipwhite skipempty
+syntax region  javascriptSwitchExpression      contained matchgroup=javascriptParens start=/(/ end=/)/ contains=@javascriptExpression,@javascriptComments nextgroup=javascriptCaseBlock skipwhite skipempty
 if &filetype =~ 'javascript'
   syntax cluster htmlJavaScriptForCase         contains=TOP,javascriptReservedCase
 else
   syntax cluster htmlJavaScriptForCase         contains=@htmlJavaScript
   syntax cluster htmlJavaScript                remove=javascriptReservedCase
 endif
-syntax region  javascriptCaseBlock             matchgroup=javascriptBraces start=/\([\^:]\s\*\)\=\zs{/ end=/}/ contains=javascriptCaseColon,javascriptCaseExpression,@htmlJavaScriptForCase fold
+syntax region  javascriptCaseBlock             matchgroup=javascriptBraces start=/{/ end=/}/ contains=javascriptCaseColon,javascriptCaseExpression,@htmlJavaScriptForCase,javascriptDefault fold
 syntax region  javascriptCaseExpression        contained start=/case/ end=/:/ contains=javascriptCase,@javascriptExpression nextgroup=javascriptBlock skipwhite skipempty
 syntax match   javascriptCaseColon             contained /:/ nextgroup=javascriptBlock skipwhite skipempty
 
