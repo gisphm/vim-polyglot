@@ -257,7 +257,7 @@ au BufRead,BufNewFile * call s:DetectScala()
 au BufRead,BufNewFile *.sbt setfiletype sbt.scala
 au BufRead,BufNewFile *.scss set filetype=scss
 au BufEnter *.scss :syntax sync fromstart
-autocmd BufNewFile,BufRead *.slim set filetype=slim
+autocmd BufNewFile,BufRead *.slim setf slim
 au BufNewFile,BufRead *.sol setf solidity
 autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
 autocmd BufNewFile,BufReadPost *.stylus set filetype=stylus
@@ -286,7 +286,7 @@ autocmd BufNewFile,BufRead {.,}tmux.conf{.*,} setlocal filetype=tmux
 autocmd BufNewFile,BufRead {.,}tmux.conf{.*,} setlocal commentstring=#\ %s
 autocmd BufNewFile,BufRead *.toml set filetype=toml
 autocmd BufNewFile,BufRead Cargo.lock set filetype=toml
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
+autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype typescript
 autocmd BufRead *.vala,*.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
 au BufRead,BufNewFile *.vala,*.vapi setfiletype vala
 au BufRead,BufNewFile *.vm set ft=velocity syntax=velocity
