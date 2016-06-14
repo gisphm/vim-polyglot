@@ -94,7 +94,7 @@ A collection of language packs for Vim.
 - [solidity](https://github.com/ethereum/vim-solidity) (syntax, indent, ftdetect)
 - [sql](https://github.com/vim-scripts/dbext.vim) (autoload, doc)
 - [stylus](https://github.com/wavded/vim-stylus) (syntax, indent, ftplugin, ftdetect)
-- [swift](https://github.com/keith/swift.vim) (syntax, indent, ftplugin, ftdetect)
+- [swift](https://github.com/keith/swift.vim) (syntax, indent, ftplugin, ftdetect, syntax_checkers)
 - [systemd](https://github.com/kurayama/systemd-vim-syntax) (syntax, ftdetect)
 - [textile](https://github.com/timcharper/textile.vim) (syntax, ftplugin, ftdetect, doc)
 - [thrift](https://github.com/solarnz/thrift.vim) (syntax, ftdetect)
