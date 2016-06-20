@@ -152,7 +152,7 @@ exec "syn match p6Type display \"\\%(". s:words . "\\)\\%([A-Za-z_\\xC0-\\xFF0-9
 unlet s:keywords s:types s:words_space s:temp s:words
 
 syn match p6PreDeclare display "[.^]\@1<!\<\%(multi\|proto\|only\)\>" nextgroup=p6Declare,p6Identifier skipwhite skipempty
-syn match p6Declare display "[.^]\@1<!\<\%(macro\|sub\|submethod\|method\|category\|module\|class\|role\|package\|enum\|grammar\|slang\|subset\)" nextgroup=p6Identifier skipwhite skipempty
+syn match p6Declare display "[.^]\@1<!\<\%(macro\|sub\|submethod\|method\|category\|module\|class\|role\|package\|enum\|grammar\|slang\|subset\)\>" nextgroup=p6Identifier skipwhite skipempty
 syn match p6DeclareRegex display "[.^]\@1<!\<\%(regex\|rule\|token\)\>" nextgroup=p6RegexName skipwhite skipempty
 
 syn match p6TypeConstraint  display "\%([.^]\|^\s*\)\@<!\a\@=\%(does\|as\|but\|trusts\|of\|returns\|handles\|where\|augment\|supersede\)\>"
@@ -358,12 +358,12 @@ syn region p6Adverb
 " * Followed by [-=] (e.g. <--, <=, <==, <->)
 syn region p6StringAngle
     \ matchgroup=p6Quote
-    \ start="\%(\<\%(enum\|for\|any\|all\|none\)\>\s*(\?\s*\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
-    \ start="\%(\s\|[<+~=!]\)\@<!<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
-    \ start="[<+~=!]\@1<!<\%(\s\|<\|=>\|[-=]\{1,2}\)\@!"
-    \ start="\%(^\s*\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
+    \ start="\%(\<\%(enum\|for\|any\|all\|none\)\>\s*(\?\s*\)\@<=<\%(<\|=>\|\%([=-]\{1,2}>\|[=-]\{2}\)\)\@!"
+    \ start="\%(\s\|[<+~=!]\)\@<!<\%(<\|=>\|\%([=-]\{1,2}>\|[=-]\{2}\)\)\@!"
+    \ start="[<+~=!]\@1<!<\%(\s\|<\|=>\|\%([=-]\{1,2}>\|[=-]\{2}\)\)\@!"
+    \ start="\%(^\s*\)\@<=<\%(<\|=>\|\%([=-]\{1,2}>\|[=-]\{2}\)\)\@!"
     \ start="[<+~=!]\@1<!<\%(\s*$\)\@="
-    \ start="\%((\s*\|=\s\+\)\@<=<\%(<\|=>\|[-=]\{1,2}>\@!\)\@!"
+    \ start="\%((\s*\|=\s\+\)\@<=<\%(<\|=>\|\%([=-]\{1,2}>\|[=-]\{2}\)\)\@!"
     \ start="<\%(\s*>\)\@="
     \ skip="\\\@1<!\\>"
     \ end=">"

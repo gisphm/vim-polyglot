@@ -98,7 +98,7 @@ A collection of language packs for Vim.
 - [systemd](https://github.com/kurayama/systemd-vim-syntax) (syntax, ftdetect)
 - [textile](https://github.com/timcharper/textile.vim) (syntax, ftplugin, ftdetect, doc)
 - [thrift](https://github.com/solarnz/thrift.vim) (syntax, ftdetect)
-- [tmux](https://github.com/tejr/vim-tmux) (syntax, ftdetect)
+- [tmux](https://github.com/tmux-plugins/vim-tmux) (syntax, indent, compiler, autoload, ftplugin, ftdetect, doc)
 - [tomdoc](https://github.com/wellbredgrapefruit/tomdoc.vim) (syntax)
 - [toml](https://github.com/cespare/vim-toml) (syntax, ftplugin, ftdetect)
 - [twig](https://github.com/qbbr/vim-twig) (syntax, ftplugin)
