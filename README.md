@@ -75,7 +75,7 @@ A collection of language packs for Vim.
 - [perl](https://github.com/vim-perl/vim-perl) (syntax, indent, ftplugin, ftdetect)
 - [php](https://github.com/StanAngeloff/php.vim) (syntax)
 - [powershell](https://github.com/Persistent13/vim-ps1) (syntax, indent, ftplugin, ftdetect, doc)
-- [protobuf](https://github.com/uarun/vim-protobuf) (syntax, ftdetect)
+- [protobuf](https://github.com/uarun/vim-protobuf) (syntax, indent, ftdetect)
 - [puppet](https://github.com/rodjek/vim-puppet) (syntax, indent, ftplugin, ftdetect)
 - [python](https://github.com/mitsuhiko/vim-python-combined) (indent)
 - [python-syntax](https://github.com/me-vlad/python-syntax.vim) (syntax)
