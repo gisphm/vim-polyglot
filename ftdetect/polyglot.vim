@@ -199,6 +199,7 @@ function! s:DetectPerl6()
 endfunction
 autocmd BufReadPost *.pl,*.pm,*.t call s:DetectPerl6()
 autocmd BufNew,BufNewFile,BufRead *.nqp setf perl6
+au BufNewFile,BufRead *.pgsql           setf pgsql
 autocmd BufNewFile,BufRead *.proto setfiletype proto
 au BufNewFile,BufRead   *.ps1   set ft=ps1
 au BufNewFile,BufRead   *.psd1  set ft=ps1

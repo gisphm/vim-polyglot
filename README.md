@@ -73,6 +73,7 @@ A collection of language packs for Vim.
 - [ocaml](https://github.com/jrk/vim-ocaml) (syntax, indent, ftplugin)
 - [opencl](https://github.com/petRUShka/vim-opencl) (syntax, indent, ftplugin, ftdetect, syntax_checkers)
 - [perl](https://github.com/vim-perl/vim-perl) (syntax, indent, ftplugin, ftdetect)
+- [pgsql](https://github.com/exu/pgsql.vim) (syntax, ftdetect)
 - [php](https://github.com/StanAngeloff/php.vim) (syntax)
 - [powershell](https://github.com/Persistent13/vim-ps1) (syntax, indent, ftplugin, ftdetect, doc)
 - [protobuf](https://github.com/uarun/vim-protobuf) (syntax, indent, ftdetect)

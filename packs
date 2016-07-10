@@ -51,6 +51,7 @@ objc:b4winckler/vim-objc
 ocaml:jrk/vim-ocaml
 opencl:petRUShka/vim-opencl
 perl:vim-perl/vim-perl
+pgsql:exu/pgsql.vim
 php:StanAngeloff/php.vim
 powershell:Persistent13/vim-ps1
 protobuf:uarun/vim-protobuf
