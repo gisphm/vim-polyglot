@@ -14,8 +14,8 @@ csv:chrisbra/csv.vim
 cucumber:tpope/vim-cucumber
 dockerfile:honza/dockerfile.vim
 elixir:elixir-lang/vim-elixir
-emberscript:heartsentwined/vim-ember-script
-emblem:heartsentwined/vim-emblem
+emberscript:yalesov/vim-ember-script
+emblem:yalesov/vim-emblem
 erlang:vim-erlang/vim-erlang-runtime
 es7:othree/es.next.syntax.vim
 git:tpope/vim-git
