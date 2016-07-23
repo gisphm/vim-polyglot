@@ -1,4 +1,5 @@
 " Language:     Colorful CSS Color Preview
+" Author:       Aristotle Pagaltzis <pagaltzis@gmx.de>
 " Author:       Greg Werbin <ourobourbon@gmail.com>
 
 " ft=coffee includes javascript, but mostly sets up own syntax groups
@@ -7,7 +8,11 @@
 " (this refers to the https://github.com/kchmck/vim-coffee-script plugin)
 if &filetype == 'coffee' | finish | endif
 
-call css_color#init('hex', 'extended', 'javaScriptComment,javaScriptLineComment,javaScriptStringS,javaScriptStringD')
+" javaScriptX = default Vim syntax, jsX = https://github.com/pangloss/vim-javascript
+call css_color#init('hex', 'extended'
+	\, 'javaScriptComment,javaScriptLineComment,javaScriptStringS,javaScriptStringD'
+	\. 'jsComment,jsString,jsTemplateString,jsObjectKeyString,jsObjectStringKey,jsClassStringKey'
+	\)
 " Vim syntax file
 " Language:     JavaScript
 " Maintainer:   Kao Wei-Ko(othree) <othree@gmail.com>

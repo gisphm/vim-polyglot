@@ -13,7 +13,7 @@ syn region coffeeScript start=#<script [^>]*type="text/coffeescript"[^>]*>#
 " Author:       Aristotle Pagaltzis <pagaltzis@gmx.de>
 
 " default html syntax should already be including the css syntax
-call css_color#extend('htmlString,htmlCommentPart')
+call css_color#init('none', 'none', 'htmlString,htmlCommentPart')
 syn include @htmlCss syntax/css/compositing-1.vim
 syn include @htmlCss syntax/css/css-align-3.vim
 syn include @htmlCss syntax/css/css-backgrounds-4.vim
