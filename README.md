@@ -53,7 +53,7 @@ A collection of language packs for Vim.
 - [html5](https://github.com/othree/html5.vim) (syntax, indent, autoload, ftplugin)
 - [jade](https://github.com/digitaltoad/vim-jade) (syntax, indent, ftplugin, ftdetect)
 - [jasmine](https://github.com/glanotte/vim-jasmine) (syntax, ftdetect)
-- [javascript](https://github.com/pangloss/vim-javascript) (syntax, indent, ftplugin, ftdetect)
+- [javascript](https://github.com/pangloss/vim-javascript) (syntax, indent, ftdetect, ftplugin)
 - [javascript-library](https://github.com/othree/javascript-libraries-syntax.vim) (autoload, syntax)
 - [jinja](https://github.com/Glench/Vim-Jinja2-Syntax) (syntax, indent, ftdetect)
 - [jsdoc](https://github.com/heavenshell/vim-jsdoc) (autoload, ftplugin, doc)
