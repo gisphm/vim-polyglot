@@ -532,13 +532,13 @@ syntax match   javascriptObjectLabel           contained /\k\+\_s*:/he=e-1 conta
 syntax match   javascriptObjectLabelColon      contained /\s*:/ nextgroup=@javascriptValue skipwhite skipempty
 " syntax match   javascriptPropertyName          contained /"[^"]\+"\s*:/he=e-1 nextgroup=@javascriptValue skipwhite skipempty
 " syntax match   javascriptPropertyName          contained /'[^']\+'\s*:/he=e-1 nextgroup=@javascriptValue skipwhite skipempty
-syntax region  javascriptPropertyName          contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ nextgroup=javascriptObjectLabelColon skipwhite skipempty
-syntax region  javascriptComputedPropertyName  contained matchgroup=javascriptPropertyName start=/\[/rs=s+1 end=/]/ contains=@javascriptValue nextgroup=javascriptFuncArg,javascriptObjectLabelColon skipwhite skipempty
+syntax region  javascriptPropertyNameString    contained start=/\z(["']\)/  skip=/\\\\\|\\\z1\|\\\n/  end=/\z1\|$/ nextgroup=javascriptObjectLabelColon skipwhite skipempty
+syntax region  javascriptComputedPropertyName  contained matchgroup=javascriptPropertyNameString start=/\[/rs=s+1 end=/]/ contains=@javascriptValue nextgroup=javascriptFuncArg,javascriptObjectLabelColon skipwhite skipempty
 syntax region  javascriptComputedProperty      contained matchgroup=javascriptProperty start=/\[/rs=s+1 end=/]/ contains=@javascriptValue,javascriptOpSymbols nextgroup=@javascriptAfterIdentifier skipwhite skipempty
 " Value for object, statement for label statement
 
 syntax cluster javascriptTemplates             contains=javascriptTemplate,javascriptTemplateSubstitution,javascriptTemplateSB
-syntax cluster javascriptStrings               contains=javascriptProp,javascriptString,@javascriptTemplates,@javascriptComments,javascriptDocComment,javascriptRegexpString,javascriptPropertyName
+syntax cluster javascriptStrings               contains=javascriptProp,javascriptString,@javascriptTemplates,@javascriptComments,javascriptDocComment,javascriptRegexpString,javascriptPropertyNameString
 syntax cluster javascriptNoReserved            contains=@javascriptStrings,@javascriptDocs,shellbang,javascriptObjectLiteral,javascriptObjectLabel,javascriptClassBlock,javascriptMethodName,javascriptMethod
 "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved break catch class const continue
@@ -693,7 +693,7 @@ syntax keyword javascriptOfComprehension       contained of
 syntax keyword javascriptIfComprehension       contained if nextgroup=javascriptIfComprehensionTail
 syntax region  javascriptIfComprehensionTail   contained matchgroup=javascriptParens start=/(/ end=/)/ contains=javascriptExpression nextgroup=javascriptForComprehension,javascriptIfComprehension skipwhite skipempty
 
-syntax region  javascriptObjectLiteral         contained matchgroup=javascriptBraces start=/{/ end=/}/ contains=@javascriptComments,javascriptObjectLabel,javascriptComma,@javascriptObjectMethod,javascriptPropertyName,javascriptComputedPropertyName,@javascriptValue fold
+syntax region  javascriptObjectLiteral         contained matchgroup=javascriptBraces start=/{/ end=/}/ contains=@javascriptComments,javascriptObjectLabel,javascriptComma,@javascriptObjectMethod,javascriptPropertyNameString,javascriptComputedPropertyName,@javascriptValue fold
 
 " syntax match   javascriptBraces                /[\[\]]/
 " syntax match   javascriptParens                /[()]/
@@ -787,7 +787,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptBoolean              Boolean
   HiLink javascriptObjectLabel          javascriptLabel
   HiLink javascriptLabel                Label
-  HiLink javascriptPropertyName         Label
+  HiLink javascriptPropertyNameString   Label
   HiLink javascriptImport               Special
   HiLink javascriptExport               Special
   HiLink javascriptTry                  Statement
