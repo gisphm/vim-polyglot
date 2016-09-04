@@ -5,7 +5,11 @@
 
 setlocal iskeyword+=$ suffixesadd+=.js
 
-let b:undo_ftplugin .= ' | setlocal iskeyword< suffixesadd<'
+if exists('b:undo_ftplugin')
+  let b:undo_ftplugin .= ' | setlocal iskeyword< suffixesadd<'
+else
+  let b:undo_ftplugin = 'setlocal iskeyword< suffixesadd<'
+endif
 " Vim plugin file
 " Language:    JavaScript Parameter Complete function
 " Maintainer:  othree <othree@gmail.com>

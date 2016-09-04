@@ -29,7 +29,7 @@ syn match haskellTypeSig
   \ haskellOperators,
   \ haskellSeparator,
   \ haskellParens
-syn keyword haskelLWhere where
+syn keyword haskellWhere where
 syn keyword haskellLet let
 syn keyword haskellDeclKeyword module class instance newtype deriving in
 syn match haskellDecl "\<\(type\|data\)\>\s\+\(\<family\>\)\?"
@@ -93,7 +93,7 @@ syn region haskellBlockComment start="{-" end="-}"
   \ @Spell
 syn region haskellPragma start="{-#" end="#-}"
 syn match haskellQuasiQuoted "." containedin=haskellQuasiQuote contained
-syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-z][a-zA-z0-9_']*|" end="|\]"
+syn region haskellQuasiQuote matchgroup=haskellTH start="\[[_a-zA-Z][a-zA-z0-9._']*|" end="|\]"
 syn region haskellTHBlock matchgroup=haskellTH start="\[\(d\|t\|p\)\?|" end="|]" contains=TOP
 syn region haskellTHDoubleBlock matchgroup=haskellTH start="\[||" end="||]" contains=TOP
 syn match haskellPreProc "^#.*$"
