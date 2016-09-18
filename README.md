@@ -62,7 +62,7 @@ A collection of language packs for Vim.
 - [jst](https://github.com/briancollins/vim-jst) (syntax, indent, ftdetect)
 - [jsx](https://github.com/mxw/vim-jsx) (ftdetect, after)
 - [julia](https://github.com/dcjones/julia-minimalist-vim) (syntax, indent, ftdetect)
-- [kotlin](https://github.com/udalov/kotlin-vim) (syntax, indent, ftdetect)
+- [kotlin](https://github.com/udalov/kotlin-vim) (syntax, indent, ftdetect, syntax_checkers)
 - [latex](https://github.com/LaTeX-Box-Team/LaTeX-Box) (syntax, indent, ftplugin, doc)
 - [less](https://github.com/groenewege/vim-less) (syntax, indent, ftplugin, ftdetect)
 - [lua](https://github.com/tbastos/vim-lua) (syntax, indent)

@@ -125,12 +125,14 @@ hi def link     goComplexes         Type
 
 
 " Predefined functions and values
-syn match       goBuiltins          /\<\v(append|cap|close|complex|copy|delete|imag|len)\ze\(/
-syn match       goBuiltins          /\<\v(make|new|panic|print|println|real|recover)\ze\(/
-syn keyword     goBoolean           iota true false nil
+syn match       goBuiltins                 /\<\v(append|cap|close|complex|copy|delete|imag|len)\ze\(/
+syn match       goBuiltins                 /\<\v(make|new|panic|print|println|real|recover)\ze\(/
+syn keyword     goBoolean                  true false
+syn keyword     goPredefinedIdentifiers    nil iota
 
-hi def link     goBuiltins          Keyword
-hi def link     goBoolean           Boolean
+hi def link     goBuiltins                 Keyword
+hi def link     goBoolean                  Boolean
+hi def link     goPredefinedIdentifiers    goBoolean
 
 " Comments; their contents
 syn keyword     goTodo              contained TODO FIXME XXX BUG
