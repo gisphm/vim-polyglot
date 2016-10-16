@@ -1,7 +1,7 @@
 " Vim syntax file
 " Language:    AngularJS for typescript
 " Maintainer:  othree <othree@gmail.com>
-" Last Change: 2013/07/26
+" Last Change: 2016/10/11
 " Version:     1.1.13.1
 " URL:         http://angularjs.org/
 
@@ -18,6 +18,11 @@ syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescri
 syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $locale $parse $rootElement
 syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $routeParams $templateCache $window 
 syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $cookies $resource $sanitize
+syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $element
+
+syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $attributes nextgroup=typescriptASattributesdot
+syntax match   typescriptASattributesdot contained /\./ nextgroup=typescriptASattributesMethods
+syntax keyword typescriptASattributesMethods contained $normalize $addClass $removeClass $updateClass $observe $set $attr
 
 syntax keyword typescriptAServices containedin=ALLBUT,typescriptComment,typescriptLineComment,typescriptString $http nextgroup=typescriptAShttpdot
 syntax match   typescriptAShttpdot contained /\./ nextgroup=typescriptAShttpMethods
@@ -81,6 +86,7 @@ if version >= 508 || !exists("did_angularjs_typescript_syntax_inits")
   HiLink typescriptAMFunctions     PreProc
   HiLink typescriptAMAttrs         PreProc
 
+  HiLink typescriptASattributesMethods  PreProc
   HiLink typescriptAShttpMethods        PreProc
   HiLink typescriptASinterpolateMethods PreProc
   HiLink typescriptASlocationMethods    PreProc

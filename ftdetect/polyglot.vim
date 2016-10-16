@@ -66,7 +66,7 @@ autocmd BufNewFile,BufRead *
       \ if getline(1) =~ '^From \x\{40\} Mon Sep 17 00:00:00 2001$' |
       \   set filetype=gitsendemail |
       \ endif
-autocmd! BufNewFile,BufRead *.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes set filetype=glsl
+autocmd! BufNewFile,BufRead *.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes,*.tesc,*.tese,*.comp set filetype=glsl
 let s:current_fileformats = ''
 let s:current_fileencodings = ''
 function! s:gofiletype_pre(type)
@@ -281,7 +281,7 @@ au BufRead,BufNewFile * call s:DetectScala()
 au BufRead,BufNewFile *.sbt setfiletype sbt.scala
 au BufRead,BufNewFile *.scss setfiletype scss
 au BufEnter *.scss :syntax sync fromstart
-autocmd BufNewFile,BufRead *.slim setf slim
+autocmd BufNewFile,BufRead *.slim setfiletype slim
 au BufNewFile,BufRead *.sol setf solidity
 autocmd BufNewFile,BufReadPost *.styl set filetype=stylus
 autocmd BufNewFile,BufReadPost *.stylus set filetype=stylus

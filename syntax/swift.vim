@@ -103,6 +103,7 @@ syntax keyword swiftAvailabilityArg renamed unavailable introduced deprecated ob
 " Keywords {{{
 syntax keyword swiftKeywords
       \ associatedtype
+      \ associativity
       \ atexit
       \ break
       \ case
@@ -141,6 +142,7 @@ syntax keyword swiftKeywords
       \ optional
       \ override
       \ postfix
+      \ precedence
       \ prefix
       \ private
       \ protocol
@@ -179,6 +181,7 @@ syntax keyword swiftAttributes
       \ @autoclosure
       \ @available
       \ @convention
+      \ @discardableResult
       \ @exported
       \ @IBAction
       \ @IBDesignable
