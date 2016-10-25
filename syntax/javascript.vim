@@ -379,7 +379,7 @@ endif
 " Vim syntax file
 " Language:     JavaScript (ECMAScript 2015)
 " Maintainer:   Kao Wei-Ko(othree) <othree@gmail.com>
-" Last Change:  2016-02-23
+" Last Change:  2016-10-20
 " Version:      1.5
 " Changes:      Go to https://github.com/othree/yajs.vim for recent changes.
 " Repository:   https://github.com/othree/yajs.vim
@@ -529,6 +529,7 @@ syntax case match
 syntax cluster javascriptAfterIdentifier       contains=javascriptDotNotation,javascriptFuncCallArg,javascriptComputedProperty,javascriptOpSymbols,@javascriptComments
 " syntax match   javascriptIdentifierName        /\<[^=<>!?+\-*\/%|&,;:. ~@#`"'\[\]\(\)\{\}\^0-9][^=<>!?+\-*\/%|&,;:. ~@#`"'\[\]\(\)\{\}\^]*/ nextgroup=@javascriptAfterIdentifier contains=@_semantic skipwhite skipempty
 syntax match   javascriptIdentifierName        /\<[a-zA-Z_$][0-9a-zA-Z_$]*/ nextgroup=@javascriptAfterIdentifier contains=javascriptGlobal,@_semantic skipwhite skipempty
+syntax match   javascriptTagRef                /\<[a-zA-Z_$][0-9a-zA-Z_$]*\ze`/ nextgroup=javascriptTemplate
 " runtime syntax/semhl.vim
 
 "Block VariableStatement EmptyStatement ExpressionStatement IfStatement IterationStatement ContinueStatement BreakStatement ReturnStatement WithStatement LabelledStatement SwitchStatement ThrowStatement TryStatement DebuggerStatement
@@ -548,7 +549,7 @@ syntax match   javascriptNumber                /\<0[oO][0-7]\+\>/ nextgroup=@jav
 syntax match   javascriptNumber                /\<0[xX][0-9a-fA-F]\+\>/ nextgroup=@javascriptComments skipwhite skipempty
 syntax match   javascriptNumber                /[+-]\=\%(\d\+\.\d\+\|\d\+\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/ nextgroup=@javascriptComments skipwhite skipempty
 
-syntax cluster javascriptTypes                 contains=javascriptString,javascriptTemplate,javascriptRegexpString,javascriptNumber,javascriptBoolean,javascriptNull,javascriptArray
+syntax cluster javascriptTypes                 contains=javascriptString,javascriptTemplate,javascriptTagRef,javascriptRegexpString,javascriptNumber,javascriptBoolean,javascriptNull,javascriptArray
 syntax cluster javascriptValue                 contains=@javascriptTypes,@javascriptExpression,javascriptFuncKeyword,javascriptClassKeyword,javascriptObjectLiteral,javascriptIdentifier,javascriptIdentifierName,javascriptOperator,javascriptOpSymbols
 
 syntax match   javascriptLabel                 /[a-zA-Z_$]\k*\_s*:/he=e-1 contains=javascriptReserved nextgroup=@javascriptValue,@javascriptStatement skipwhite skipempty
@@ -562,7 +563,7 @@ syntax region  javascriptComputedProperty      contained matchgroup=javascriptPr
 " Value for object, statement for label statement
 
 syntax cluster javascriptTemplates             contains=javascriptTemplate,javascriptTemplateSubstitution,javascriptTemplateSB
-syntax cluster javascriptStrings               contains=javascriptProp,javascriptString,@javascriptTemplates,@javascriptComments,javascriptDocComment,javascriptRegexpString,javascriptPropertyNameString
+syntax cluster javascriptStrings               contains=javascriptProp,javascriptString,@javascriptTemplates,javascriptTagRef,@javascriptComments,javascriptDocComment,javascriptRegexpString,javascriptPropertyNameString
 syntax cluster javascriptNoReserved            contains=@javascriptStrings,@javascriptDocs,shellbang,javascriptObjectLiteral,javascriptParenObjectLiteral,javascriptObjectLabel,javascriptClassBlock,javascriptMethodName,javascriptMethod
 "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords
 syntax keyword javascriptReserved              containedin=ALLBUT,@javascriptNoReserved break catch class const continue
@@ -733,7 +734,7 @@ syntax match   javascriptEndColons             /[;,]/
 " <https://github.com/vim/vim/blob/master/runtime/syntax/javascript.vim#L48>
 syntax region  javascriptRegexpString          start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gimuy]\{0,5\}\s*$+ end=+/[gimuy]\{0,5\}\s*[;.,)\]}]+me=e-1 oneline
 
-syntax cluster javascriptEventTypes            contains=javascriptEventString,javascriptTemplate,javascriptNumber,javascriptBoolean,javascriptNull
+syntax cluster javascriptEventTypes            contains=javascriptEventString,javascriptTemplate,javascriptTagRef,javascriptNumber,javascriptBoolean,javascriptNull
 syntax cluster javascriptOps                   contains=javascriptOpSymbols,javascriptLogicSymbols,javascriptOperator
 syntax cluster javascriptExpression            contains=javascriptArrowFuncDef,javascriptParenExp,@javascriptValue,javascriptObjectLiteral,javascriptFuncKeyword,javascriptYield,javascriptIdentifierName,javascriptRegexpString,@javascriptTypes,@javascriptOps,javascriptGlobal,javascriptGlobalMethod,jsxRegion
 syntax cluster javascriptEventExpression       contains=javascriptArrowFuncDef,javascriptParenExp,@javascriptValue,javascriptObjectLiteral,javascriptFuncKeyword,javascriptIdentifierName,javascriptRegexpString,@javascriptEventTypes,@javascriptOps,javascriptGlobal,jsxRegion
@@ -833,6 +834,7 @@ if exists("did_javascript_hilink")
   HiLink javascriptFuncName             Function
   HiLink javascriptFuncArg              Special
   HiLink javascriptArrowFuncArg         javascriptFuncArg
+  HiLink javascriptTagRef               Function
   HiLink javascriptComma                Normal
 
   HiLink javascriptClassKeyword         Keyword
