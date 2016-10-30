@@ -67,25 +67,6 @@ autocmd BufNewFile,BufRead *
       \   set filetype=gitsendemail |
       \ endif
 autocmd! BufNewFile,BufRead *.glsl,*.geom,*.vert,*.frag,*.gsh,*.vsh,*.fsh,*.vs,*.fs,*.gs,*.tcs,*.tes,*.tesc,*.tese,*.comp set filetype=glsl
-let s:current_fileformats = ''
-let s:current_fileencodings = ''
-function! s:gofiletype_pre(type)
-  let s:current_fileformats = &g:fileformats
-  let s:current_fileencodings = &g:fileencodings
-  set fileencodings=utf-8 fileformats=unix
-  let &l:filetype = a:type
-endfunction
-function! s:gofiletype_post()
-  let &g:fileformats = s:current_fileformats
-  let &g:fileencodings = s:current_fileencodings
-endfunction
-au BufNewFile *.go setfiletype go | setlocal fileencoding=utf-8 fileformat=unix
-au BufRead *.go call s:gofiletype_pre("go")
-au BufReadPost *.go call s:gofiletype_post()
-au BufNewFile *.s setfiletype asm | setlocal fileencoding=utf-8 fileformat=unix
-au BufRead *.s call s:gofiletype_pre("asm")
-au BufReadPost *.s call s:gofiletype_post()
-au BufRead,BufNewFile *.tmpl set filetype=gohtmltmpl
 au BufRead,BufNewFile *.gradle set filetype=gradle
 autocmd BufNewFile,BufRead *.haml,*.hamlbars,*.hamlc setf haml
 autocmd BufNewFile,BufRead *.sass setf sass

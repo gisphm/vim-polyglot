@@ -21,7 +21,6 @@ es7:othree/es.next.syntax.vim
 git:tpope/vim-git
 gitignore:gisphm/vim-gitignore
 glsl:tikhomirov/vim-glsl
-go:fatih/vim-go
 gradle:gisphm/vim-gradle
 groovy:vim-scripts/groovy.vim
 haml:tpope/vim-haml
