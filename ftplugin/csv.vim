@@ -257,8 +257,10 @@ fu! <sid>GetPat(colnr, maxcolnr, pat, allowmore) "{{{3
         endif
     elseif a:colnr == a:maxcolnr
         if !exists("b:csv_fixed_width_cols")
+            " Allow space in front of the pattern, so that it works correctly
+            " even if :Arrange Col has been used #100
             return '^' . <SID>GetColPat(a:colnr - 1,0) .
-                \ '\zs' . a:pat . '\ze' . (a:allowmore ? '' : '$')
+                \ '\s*\zs' . a:pat . '\ze' . (a:allowmore ? '' : '$')
         else
             return '\%' . b:csv_fixed_width_cols[-1] .
                 \ 'c\zs' . a:pat . '\ze' . (a:allowmore ? '' : '$')
@@ -347,8 +349,10 @@ fu! <sid>DeleteColumn(arg) "{{{3
     endif
     if i > 1
         call <sid>Warn(printf("%d columns deleted", i))
-    else
+    elseif i == 1
         call <sid>Warn("1 column deleted")
+    else
+        call <sid>Warn("no column deleted")
     endif
     call winrestview(_wsv)
 endfu
@@ -550,7 +554,7 @@ fu! <sid>ColWidth(colnr, ...) "{{{3
         if !exists("b:csv_list")
             " only check first 10000 lines, to be faster
             let last = line('$')
-            if exists("a:1")
+            if exists("a:1") && !empty(a:1)
                 let last = a:1
             endif
             if !get(b:, 'csv_arrange_use_all_rows', 0)
@@ -601,7 +605,9 @@ fu! <sid>ArrangeCol(first, last, bang, limit, ...) range "{{{3
         return
     endif
     let cur=winsaveview()
-    if a:bang || (exists("a:1") && !empty(a:1))
+    " Force recalculation of Column width
+    let row = exists("a:1") ? a:1 : ''
+    if a:bang || !empty(row)
         if a:bang && exists("b:col_width")
           " Unarrange, so that if csv_arrange_align has changed
           " it will be adjusted automaticaly
@@ -634,8 +640,6 @@ fu! <sid>ArrangeCol(first, last, bang, limit, ...) range "{{{3
     endif
 
     if !exists("b:col_width")
-        " Force recalculation of Column width
-        let row = exists("a:1") ? a:1 : ''
         call <sid>CalculateColumnWidth(row)
     endif
 
@@ -709,11 +713,12 @@ fu! <sid>PrepUnArrangeCol(first, last) "{{{3
 endfu
 fu! <sid>UnArrangeCol(match) "{{{3
     " Strip leading white space, also trims empty records:
-    return substitute(a:match, '\%(^\s\+\)\|\%(\s\+\ze'.b:delimiter. '\?$\)', '', 'g')
+    return substitute(a:match, '\%(^ \+\)\|\%( \+\ze'.b:delimiter. '\?$\)', '', 'g')
 endfu
 fu! <sid>CalculateColumnWidth(row) "{{{3
     " Internal function, not called from external,
     " does not work with fixed width columns
+    " row for the row for which to calculate the width
     let b:col_width=[]
     try
         if exists("b:csv_headerline")
@@ -723,11 +728,7 @@ fu! <sid>CalculateColumnWidth(row) "{{{3
         endif
         let s:max_cols=<SID>MaxColumns(line('.'))
         for i in range(1,s:max_cols)
-            if empty(a:row)
-                call add(b:col_width, <SID>ColWidth(i))
-            else
-                call add(b:col_width, <SID>ColWidth(i,a:row))
-            endif
+            call add(b:col_width, <SID>ColWidth(i, a:row))
         endfor
     catch /csv:no_col/
         call <sid>Warn("Error: getting Column numbers, aborting!")
@@ -764,7 +765,12 @@ fu! <sid>Columnize(field) "{{{3
     let width = get(b:col_width, colnr, 20)
     let align = 'r'
     if exists('b:csv_arrange_align')
-        let align_list=split(get(b:, 'csv_arrange_align', " "), '\zs')
+        let align=b:csv_arrange_align
+        let indx=match(align, '\*')
+        if indx > 0
+            let align = align[0:(indx-1)]. repeat(align[indx-1], len(b:col_width)-indx)
+        endif
+        let align_list=split(align, '\zs')
         try
             let align = align_list[colnr]
         catch
@@ -1256,6 +1262,64 @@ fu! <sid>MoveColumn(start, stop, ...) range "{{{3
     endfor
     call winrestview(wsv)
 endfu
+fu! <sid>DupColumn(start, stop, ...) range "{{{3
+    " Add new empty column
+    " Explicitly give the range as argument,
+    " cause otherwise, Vim would move the cursor
+    if exists("b:csv_fixed_width_cols")
+        call <sid>Warn("Duplicating Columns only works for delimited files")
+        return
+    endif
+
+    let wsv = winsaveview()
+
+    " translate 1 based columns into zero based list index
+    let col = <sid>WColumn() - 1
+    let max = <sid>MaxColumns()
+    let add_delim = 0
+
+    " If no argument is given, add column after current column
+    if exists("a:1")
+        if a:1 == '$' || a:1 >= max
+            let pos = max - 1
+        elseif a:1 < 0
+            let pos = col
+        else
+            let pos = a:1 - 1
+        endif
+    else
+        let pos = col
+    endif
+    if pos == max - 1
+        let add_delim = 1
+    endif
+    let cnt=(exists("a:2") && a:2 > 0 ? a:2 : 1)
+
+    " if the data contains comments, substitute one line after another
+    " skipping comment lines (we could do it with a single :s statement,
+    " but that would fail for the first and last column.
+
+    let commentpat = '\%(\%>'.(a:start-1).'l\V'.
+                \ escape(b:csv_cmt[0], '\\').'\m\)'. '\&\%(\%<'.
+                \ (a:stop+1). 'l\V'. escape(b:csv_cmt[0], '\\'). '\m\)'
+
+    for i in range(a:start, a:stop)
+        let content = getline(i)
+        if content =~ '^\s*\V'. escape(b:csv_cmt[0], '\\')
+            " skip comments
+            continue
+        endif
+        let fields = split(getline(i), b:col.'\zs')
+        if add_delim && fields[-1][:-1] isnot b:delimiter
+            " Need to add a delimiter
+            let fields[pos] .= b:delimiter
+        endif
+        let fields = fields[0:pos] + repeat([fields[pos]], cnt) + fields[pos+1:-1]
+        call setline(i, join(fields, ''))
+    endfor
+    call winrestview(wsv)
+endfu
+
 fu! <sid>AddColumn(start, stop, ...) range "{{{3
     " Add new empty column
     " Explicitly give the range as argument,
@@ -1285,12 +1349,11 @@ fu! <sid>AddColumn(start, stop, ...) range "{{{3
     let cnt=(exists("a:2") && a:2 > 0 ? a:2 : 1)
 
     " translate 1 based columns into zero based list index
-    "let pos -= 1
     let col -= 1
 
     if pos == 0
         let pat = '^'
-    elseif pos == max-1
+    elseif pos == max
         let pat = '$'
     else
         let pat = <sid>GetColPat(pos,1)
@@ -1360,6 +1423,105 @@ fu! <sid>SumColumn(list) "{{{3
         return sum
     endif
 endfu
+fu! <sid>AvgColumn(list) "{{{3
+    if empty(a:list)
+        return 0
+    else
+        let cnt = 0
+        let sum = has("float") ? 0.0 : 0
+        for item in a:list
+            if empty(item)
+                continue
+            endif
+            let nr = matchstr(item, '-\?\d\(.*\d\)\?$')
+            let format1 = '^-\?\d\+\zs\V' . s:nr_format[0] . '\m\ze\d'
+            let format2 = '\d\+\zs\V' . s:nr_format[1] . '\m\ze\d'
+            try
+                let nr = substitute(nr, format1, '', '')
+                if has("float") && s:nr_format[1] != '.'
+                    let nr = substitute(nr, format2, '.', '')
+                endif
+            catch
+                let nr = 0
+            endtry
+            let sum += (has("float") ? str2float(nr) : (nr + 0))
+            let cnt += 1
+        endfor
+        if has("float")
+            return printf("%.2f", sum/cnt)
+        else
+            return sum/cnt
+        endif
+    endif
+endfu
+fu! <sid>VarianceColumn(list, is_population) "{{{3
+    if empty(a:list)
+        return 0
+    else
+        let cnt = 0
+        let sum = has("float") ? 0.0 : 0
+        let avg = <sid>AvgColumn(a:list)
+        for item in a:list
+            if empty(item)
+                continue
+            endif
+            let nr = matchstr(item, '-\?\d\(.*\d\)\?$')
+            let format1 = '^-\?\d\+\zs\V' . s:nr_format[0] . '\m\ze\d'
+            let format2 = '\d\+\zs\V' . s:nr_format[1] . '\m\ze\d'
+            try
+                let nr = substitute(nr, format1, '', '')
+                if has("float") && s:nr_format[1] != '.'
+                    let nr = substitute(nr, format2, '.', '')
+                endif
+            catch
+                let nr = 0
+            endtry
+            let sum += pow((has("float") ? (str2float(nr)-avg) : ((nr + 0)-avg)), 2)
+            let cnt += 1
+        endfor
+        if(a:is_population == 0)
+            let cnt = cnt-1
+        endif
+        if has("float")
+            return printf("%.2f", sum/cnt)
+        else
+            return sum/(cnt)
+        endif
+    endif
+endfu
+
+fu! <sid>SmplVarianceColumn(list) "{{{2
+    if empty(a:list)
+        return 0
+    else
+        return <sid>VarianceColumn(a:list, 0)
+    endif
+endfu
+
+fu! <sid>PopVarianceColumn(list) "{{{2
+    if empty(a:list)
+        return 0
+    else
+        return <sid>VarianceColumn(a:list, 1)
+    endif
+endfu
+
+fu! <sid>SmplStdDevColumn(list) "{{{2
+    if empty(a:list)
+        return 0
+    else
+        return sqrt(str2float(<sid>VarianceColumn(a:list, 0)))
+    endif
+endfu
+
+fu! <sid>PopStdDevColumn(list) "{{{2
+    if empty(a:list)
+        return 0
+    else
+        return sqrt(str2float(<sid>VarianceColumn(a:list, 1)))
+    endif
+endfu
+
 fu! <sid>MaxColumn(list) "{{{3
     " Sum a list of values, but only consider the digits within each value
     " parses the digits according to the given format (if none has been
@@ -1868,7 +2030,7 @@ fu! <sid>InitCSVFixedWidth() "{{{3
             let &l:cc=_cc
             redraw!
             return
-        elseif char == "\<CR>" || char == "\n" || char == "\r"  " Enter
+        elseif char == "\<CR>" || char == "\n" || char == "\r" || char == 13  " Enter
             let Dict[tcc] = 1
             break
         elseif char == char2nr('?')
@@ -1974,37 +2136,39 @@ fu! <sid>MoveOver(outer) "{{{3
     let @/ = _s
 endfu
 fu! <sid>CSVMappings() "{{{3
-    call <sid>Map('noremap', 'W', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
-    call <sid>Map('noremap', '<C-Right>', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
-    call <sid>Map('noremap', 'L', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
-    call <sid>Map('noremap', 'E', ':<C-U>call <SID>MoveCol(-1, line("."))<CR>')
-    call <sid>Map('noremap', '<C-Left>', ':<C-U>call <SID>MoveCol(-1, line("."))<CR>')
-    call <sid>Map('noremap', 'H', ':<C-U>call <SID>MoveCol(-1, line("."), 1)<CR>')
-    call <sid>Map('noremap', 'K', ':<C-U>call <SID>MoveCol(0, line(".")-v:count1)<CR>')
-    call <sid>Map('nnoremap', '<Up>', ':<C-U>call <SID>MoveCol(0, line(".")-v:count1)<CR>')
-    call <sid>Map('noremap', 'J', ':<C-U>call <SID>MoveCol(0, line(".")+v:count1)<CR>')
-    call <sid>Map('nnoremap', '<Down>', ':<C-U>call <SID>MoveCol(0, line(".")+v:count1)<CR>')
-    call <sid>Map('nnoremap', '<CR>', ':<C-U>call <SID>PrepareFolding(1, 1)<CR>')
-    call <sid>Map('nnoremap', '<Space>', ':<C-U>call <SID>PrepareFolding(1, 0)<CR>')
-    call <sid>Map('nnoremap', '<BS>', ':<C-U>call <SID>PrepareFolding(0, 1)<CR>')
-    call <sid>Map('imap', '<CR>', '<sid>ColumnMode()', 'expr')
-    " Text object: Field
-    call <sid>Map('xnoremap', 'if', ':<C-U>call <sid>MoveOver(0)<CR>')
-    call <sid>Map('xnoremap', 'af', ':<C-U>call <sid>MoveOver(1)<CR>')
-    call <sid>Map('omap', 'af', ':norm vaf<cr>')
-    call <sid>Map('omap', 'if', ':norm vif<cr>')
-    call <sid>Map('xnoremap', 'iL', ':<C-U>call <sid>SameFieldRegion()<CR>')
-    call <sid>Map('omap', 'iL', ':<C-U>call <sid>SameFieldRegion()<CR>')
-    " Remap <CR> original values to a sane backup
-    call <sid>Map('noremap', '<LocalLeader>J', 'J')
-    call <sid>Map('noremap', '<LocalLeader>K', 'K')
-    call <sid>Map('xnoremap', '<LocalLeader>W', 'W')
-    call <sid>Map('xnoremap', '<LocalLeader>E', 'E')
-    call <sid>Map('noremap', '<LocalLeader>H', 'H')
-    call <sid>Map('noremap', '<LocalLeader>L', 'L')
-    call <sid>Map('nnoremap', '<LocalLeader><CR>', '<CR>')
-    call <sid>Map('nnoremap', '<LocalLeader><Space>', '<Space>')
-    call <sid>Map('nnoremap', '<LocalLeader><BS>', '<BS>')
+    if !exists("g:no_plugin_maps") && !exists("g:no_csv_maps")
+        call <sid>Map('noremap', 'W', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
+        call <sid>Map('noremap', '<C-Right>', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
+        call <sid>Map('noremap', 'L', ':<C-U>call <SID>MoveCol(1, line("."))<CR>')
+        call <sid>Map('noremap', 'E', ':<C-U>call <SID>MoveCol(-1, line("."))<CR>')
+        call <sid>Map('noremap', '<C-Left>', ':<C-U>call <SID>MoveCol(-1, line("."))<CR>')
+        call <sid>Map('noremap', 'H', ':<C-U>call <SID>MoveCol(-1, line("."), 1)<CR>')
+        call <sid>Map('noremap', 'K', ':<C-U>call <SID>MoveCol(0, line(".")-v:count1)<CR>')
+        call <sid>Map('nnoremap', '<Up>', ':<C-U>call <SID>MoveCol(0, line(".")-v:count1)<CR>')
+        call <sid>Map('noremap', 'J', ':<C-U>call <SID>MoveCol(0, line(".")+v:count1)<CR>')
+        call <sid>Map('nnoremap', '<Down>', ':<C-U>call <SID>MoveCol(0, line(".")+v:count1)<CR>')
+        call <sid>Map('nnoremap', '<CR>', ':<C-U>call <SID>PrepareFolding(1, 1)<CR>')
+        call <sid>Map('nnoremap', '<Space>', ':<C-U>call <SID>PrepareFolding(1, 0)<CR>')
+        call <sid>Map('nnoremap', '<BS>', ':<C-U>call <SID>PrepareFolding(0, 1)<CR>')
+        call <sid>Map('imap', '<CR>', '<sid>ColumnMode()', 'expr')
+        " Text object: Field
+        call <sid>Map('xnoremap', 'if', ':<C-U>call <sid>MoveOver(0)<CR>')
+        call <sid>Map('xnoremap', 'af', ':<C-U>call <sid>MoveOver(1)<CR>')
+        call <sid>Map('omap', 'af', ':norm vaf<cr>')
+        call <sid>Map('omap', 'if', ':norm vif<cr>')
+        call <sid>Map('xnoremap', 'iL', ':<C-U>call <sid>SameFieldRegion()<CR>')
+        call <sid>Map('omap', 'iL', ':<C-U>call <sid>SameFieldRegion()<CR>')
+        " Remap <CR> original values to a sane backup
+        call <sid>Map('noremap', '<LocalLeader>J', 'J')
+        call <sid>Map('noremap', '<LocalLeader>K', 'K')
+        call <sid>Map('xnoremap', '<LocalLeader>W', 'W')
+        call <sid>Map('xnoremap', '<LocalLeader>E', 'E')
+        call <sid>Map('noremap', '<LocalLeader>H', 'H')
+        call <sid>Map('noremap', '<LocalLeader>L', 'L')
+        call <sid>Map('nnoremap', '<LocalLeader><CR>', '<CR>')
+        call <sid>Map('nnoremap', '<LocalLeader><Space>', '<Space>')
+        call <sid>Map('nnoremap', '<LocalLeader><BS>', '<BS>')
+    endif
 endfu
 fu! <sid>CommandDefinitions() "{{{3
     call <sid>LocalCmd("WhatColumn", ':echo <sid>WColumn(<bang>0)',
@@ -2019,6 +2183,18 @@ fu! <sid>CommandDefinitions() "{{{3
     call <sid>LocalCmd("ArrangeColumn",
         \ ':call <sid>ArrangeCol(<line1>, <line2>, <bang>0, -1, <q-args>)',
         \ '-range -bang -nargs=?')
+    call <sid>LocalCmd("SmplVarCol",
+        \ ':echo csv#EvalColumn(<q-args>, "<sid>SmplVarianceColumn", <line1>,<line2>)',
+        \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
+    call <sid>LocalCmd("PopVarCol",
+        \ ':echo csv#EvalColumn(<q-args>, "<sid>PopVarianceColumn", <line1>,<line2>)',
+        \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
+    call <sid>LocalCmd("SmplStdCol",
+        \ ':echo csv#EvalColumn(<q-args>, "<sid>SmplStdDevColumn", <line1>,<line2>)',
+        \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
+    call <sid>LocalCmd("PopStdCol",
+        \ ':echo csv#EvalColumn(<q-args>, "<sid>SmplStdDevColumn", <line1>,<line2>)',
+        \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
     call <sid>LocalCmd("UnArrangeColumn",
         \':call <sid>PrepUnArrangeCol(<line1>, <line2>)',
         \ '-range')
@@ -2055,6 +2231,9 @@ fu! <sid>CommandDefinitions() "{{{3
     call <sid>LocalCmd("CountCol",
         \ ':echo csv#EvalColumn(<q-args>, "<sid>CountColumn", <line1>,<line2>)',
         \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
+    call <sid>LocalCmd("AvgCol",
+        \ ':echo csv#EvalColumn(<q-args>, "<sid>AvgColumn", <line1>,<line2>)',
+        \ '-nargs=? -range=% -complete=custom,<sid>SortComplete')
     call <sid>LocalCmd("ConvertData",
         \ ':call <sid>PrepareDoForEachColumn(<line1>,<line2>,<bang>0)',
         \ '-bang -nargs=? -range=%')
@@ -2078,9 +2257,22 @@ fu! <sid>CommandDefinitions() "{{{3
     call <sid>LocalCmd("AddColumn",
         \ ':call <sid>AddColumn(<line1>,<line2>,<f-args>)',
         \ '-range=% -nargs=* -complete=custom,<sid>SortComplete')
+    call <sid>LocalCmd("DupColumn",
+        \ ':call <sid>DupColumn(<line1>,<line2>,<f-args>)',
+        \ '-range=% -nargs=* -complete=custom,<sid>SortComplete')
     call <sid>LocalCmd('Substitute', ':call <sid>SubstituteInColumn(<q-args>,<line1>,<line2>)',
         \ '-nargs=1 -range=%')
+    call <sid>LocalCmd('ColumnWidth', ':call <sid>ColumnWidth()', '')
 endfu
+fu! <sid>ColumnWidth()
+    let w=CSVWidth()
+    let i=1
+    for col in w
+        echomsg printf("Column %02i: %d", i, col)
+        let i+=1
+    endfor
+endfu
+
 fu! <sid>Map(map, name, definition, ...) "{{{3
     let keyname = substitute(a:name, '[<>]', '', 'g')
     let expr = (exists("a:1") && a:1 == 'expr'  ? '<expr>' : '')
@@ -2679,9 +2871,15 @@ fu! csv#EvalColumn(nr, func, first, last, ...) range "{{{3
     if col == 0
         let col = 1
     endif
-    " don't take the header line into consideration
-    let start = a:first - 1 + s:csv_fold_headerline
-    let stop  = a:last  - 1 + s:csv_fold_headerline
+
+    let start = a:first - 1
+    let stop  = a:last  - 1
+
+    if a:first <= s:csv_fold_headerline
+        " don't take the header line into consideration
+        let start += s:csv_fold_headerline
+        let stop  += s:csv_fold_headerline
+    endif
 
     let column = <sid>CopyCol('', col, '')[start : stop]
     " Delete delimiter
@@ -2829,6 +3027,30 @@ fu! CSVCount(col, fmt, first, last, ...) "{{{3
     unlet! s:additional['distinct']
     return (empty(result) ? 0 : result)
 endfu
+fu! CSVWidth() "{{{3
+    " does not work with fixed width columns
+    if exists("b:csv_fixed_width_cols")
+        let c = getline(1,'$')
+        let c = map(c, 'substitute(v:val, ".", "x", "g")')
+        let c = map(c, 'strlen(v:val)+0')
+        let max = max(c)
+        let temp = copy(b:csv_fixed_width_cols)
+        let width = []
+        let y=1
+        " omit the first item, since the starting position is not very useful
+        for i in temp[1:]
+            let length=i-y
+            let y=i
+            call add(width, length)
+        endfor
+        " Add width for last column
+        call add(width, max-y+1)
+    else
+        call <sid>CalculateColumnWidth('')
+        let width=map(copy(b:col_width), 'v:val-1')
+    endif
+    return width
+endfu
 fu! CSV_WCol(...) "{{{3
     " Needed for airline
     try
@@ -2854,4 +3076,4 @@ let &cpo = s:cpo_save
 unlet s:cpo_save
 
 " Vim Modeline " {{{2
-" vim: set foldmethod=marker et:
+" vim: set foldmethod=marker et sw=0 sts=-1 ts=4:

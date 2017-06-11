@@ -6,10 +6,11 @@ endif
 syntax keyword javascriptStringMethod contained anchor charAt charCodeAt codePointAt nextgroup=javascriptFuncCallArg
 syntax keyword javascriptStringMethod contained concat endsWith includes indexOf lastIndexOf nextgroup=javascriptFuncCallArg
 syntax keyword javascriptStringMethod contained link localeCompare match normalize nextgroup=javascriptFuncCallArg
-syntax keyword javascriptStringMethod contained repeat replace search slice split nextgroup=javascriptFuncCallArg
-syntax keyword javascriptStringMethod contained startsWith substr substring toLocaleLowerCase nextgroup=javascriptFuncCallArg
-syntax keyword javascriptStringMethod contained toLocaleUpperCase toLowerCase toString nextgroup=javascriptFuncCallArg
-syntax keyword javascriptStringMethod contained toUpperCase trim valueOf nextgroup=javascriptFuncCallArg
+syntax keyword javascriptStringMethod contained padStart padEnd repeat replace search nextgroup=javascriptFuncCallArg
+syntax keyword javascriptStringMethod contained slice split startsWith substr substring nextgroup=javascriptFuncCallArg
+syntax keyword javascriptStringMethod contained toLocaleLowerCase toLocaleUpperCase nextgroup=javascriptFuncCallArg
+syntax keyword javascriptStringMethod contained toLowerCase toString toUpperCase trim nextgroup=javascriptFuncCallArg
+syntax keyword javascriptStringMethod contained valueOf nextgroup=javascriptFuncCallArg
 syntax cluster props add=javascriptStringMethod
 if exists("did_javascript_hilink") | HiLink javascriptStringMethod Keyword
 endif
